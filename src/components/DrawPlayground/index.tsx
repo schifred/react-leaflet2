@@ -56,7 +56,7 @@ type Methods = {
 type ControlDrawProps = LeafletControl.DrawConstructorOptions & Methods;
 
 const ControlDraw = forwardRef<{ control?: LeafletControl.Draw }, ControlDrawProps>(
-  ({ draw = {}, edit, position = 'topleft', children, ...methods }, ref) => {
+  ({ draw = {}, edit, position = 'topleft', children, ...rest }, ref) => {
     const { container } = useContainerContext<LeafletFeatureGroup>();
     const { register } = useEvents();
 
@@ -87,20 +87,34 @@ const ControlDraw = forwardRef<{ control?: LeafletControl.Draw }, ControlDrawPro
       [container],
     );
 
-    const { onCreated } = methods;
+    const { onChange, onCreated, onEdited, ...methods } = rest;
+    const handleChange = useCallback(
+      (event: LeafletEvent) => {
+        if (onChange) onChange(event, container);
+      },
+      [container],
+    );
+
     const handleCreated = useCallback(
       (event: LeafletEvent) => {
-        const { layer } = event;
-        if (container) container.addLayer(layer);
+        if (container) container.addLayer(event?.layer);
         if (onCreated) onCreated(event, container);
+      },
+      [container],
+    );
+
+    const handleEdited = useCallback(
+      (event: LeafletEvent) => {
+        if (onEdited) onEdited(event, container);
+        handleChange(event);
       },
       [container],
     );
 
     useEffect(() => {
       const unregister = register(container, {
-        [FeatureGroupEvent.onLayerAdd]: createHandler('onChange'),
-        [FeatureGroupEvent.onLayerRemove]: createHandler('onChange'),
+        [FeatureGroupEvent.onLayerAdd]: handleChange,
+        [FeatureGroupEvent.onLayerRemove]: handleChange,
       });
 
       return () => {
@@ -116,6 +130,7 @@ const ControlDraw = forwardRef<{ control?: LeafletControl.Draw }, ControlDrawPro
 
       const unregister = register(map, {
         [ControlDrawEvent.onCreated]: handleCreated,
+        [ControlDrawEvent.onEdited]: handleEdited,
         ...events,
       });
 

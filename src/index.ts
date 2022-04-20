@@ -17,7 +17,7 @@ import {
 } from './components';
 import { latLng } from './utils/latlng';
 import { convertWkt2GeoObject } from './utils/converts';
-import { getCenter } from './utils/map';
+import { getCenter, getArea, getWkt } from './utils/map';
 
 export { CRS, Renderer };
 
@@ -38,4 +38,4 @@ export {
   DrawPlayground,
 };
 
-export { latLng, convertWkt2GeoObject, getCenter };
+export { latLng, convertWkt2GeoObject, getCenter, getArea, getWkt };

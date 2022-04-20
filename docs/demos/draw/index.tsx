@@ -1,6 +1,15 @@
 import React, { Fragment } from 'react';
 import { DivIcon, featureGroup, Point } from 'leaflet';
-import { Map, WKT, TileLayer, latLng, DrawPlayground, getCenter } from 'chaos-react-leaflet';
+import {
+  Map,
+  WKT,
+  TileLayer,
+  latLng,
+  DrawPlayground,
+  getCenter,
+  getArea,
+  getWkt,
+} from 'chaos-react-leaflet';
 import 'leaflet/dist/leaflet.css';
 
 const ACCESS_TOKEN =
@@ -46,8 +55,9 @@ export default () => {
         <DrawPlayground
           draw={draw}
           onChange={(e, featureGroup) => {
-            console.log(111);
             console.log(getCenter(featureGroup));
+            console.log(getArea(featureGroup));
+            console.log(getWkt(featureGroup));
           }}
         >
           <WKT wkt={wkt} fit></WKT>
