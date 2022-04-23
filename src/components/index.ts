@@ -2,7 +2,7 @@ import Map from './Map';
 export * from './Group';
 export * from './Layer';
 export * from './Path';
-import GeoJson from './GeoJson';
+import GeoJson from './GeoJSON';
 import WKT from './WKT';
 import Marker from './Marker';
 export * from './Overlay';

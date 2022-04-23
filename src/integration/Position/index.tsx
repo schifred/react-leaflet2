@@ -1,4 +1,4 @@
-import React, { forwardRef, useCallback, useState } from 'react';
+import React, { forwardRef, useCallback, useState, useEffect } from 'react';
 import { Map as LeafletMap, LatLng } from 'leaflet';
 import { Marker } from '../../components';
 import EnhancedMap from '../EnhancedMap';
@@ -13,7 +13,7 @@ const icon = new Marker.Icon({
 });
 
 const Position = forwardRef<{ map?: LeafletMap }, PositionProps>(
-  ({ children, icon: iconProp, onChange, ...props }, ref) => {
+  ({ children, icon: iconProp, latlng: latlngProp, onChange, ...props }, ref) => {
     const [latlng, setLatlng] = useState<LatLng>();
 
     const handleClick = useCallback(
@@ -23,6 +23,10 @@ const Position = forwardRef<{ map?: LeafletMap }, PositionProps>(
       },
       [onChange],
     );
+
+    useEffect(() => {
+      if (ref?.current?.map) ref?.current?.map?.setView(latlngProp);
+    }, [ref, latlngProp]);
 
     return (
       <EnhancedMap {...props} onClick={handleClick} ref={ref}>

@@ -1,147 +1,119 @@
-import React, { forwardRef, useCallback, useEffect } from 'react';
-import Leaflet, {
+import React, { forwardRef, useCallback, useEffect, useRef, useImperativeHandle } from 'react';
+import {
   FeatureGroup as LeafletFeatureGroup,
   Control as LeafletControl,
   LeafletEvent,
 } from 'leaflet';
 import 'leaflet-draw';
-// import 'leaflet-draw/dist/leaflet.draw-src.js';
 import 'leaflet-draw/dist/leaflet.draw.css';
 import FeatureGroup, { FeatureGroupEvent } from '../Group/FeatureGroup';
 import useControl from '../../hooks/useControl';
 import useEvents, { Events } from '../../hooks/useEvents';
 import { useContainerContext } from '../../contexts/containter';
 import './language';
+import { ControlDrawEvent, Methods } from './events';
+import { ControlDrawProps } from './types';
 
-export const ControlDrawEvent = {
-  onCreated: Leaflet.Draw.Event.CREATED,
-  onEdited: Leaflet.Draw.Event.EDITED,
-  onDrawStart: Leaflet.Draw.Event.DRAWSTART,
-  onDrawStop: Leaflet.Draw.Event.DRAWSTOP,
-  onDrawVertex: Leaflet.Draw.Event.DRAWVERTEX,
-  onEditStart: Leaflet.Draw.Event.EDITSTART,
-  onEditMove: Leaflet.Draw.Event.EDITMOVE,
-  onEditResize: Leaflet.Draw.Event.EDITRESIZE,
-  onEditVertex: Leaflet.Draw.Event.EDITVERTEX,
-  onEditStop: Leaflet.Draw.Event.EDITSTOP,
-  onDeleted: Leaflet.Draw.Event.DELETED,
-  onDeleteStart: Leaflet.Draw.Event.DELETESTART,
-  onDeleteStop: Leaflet.Draw.Event.DELETESTOP,
-  onMarkerContext: Leaflet.Draw.Event.MARKERCONTEXT,
-  onToolbarClosed: Leaflet.Draw.Event.TOOLBARCLOSED,
-  onToolbarOpened: Leaflet.Draw.Event.TOOLBAROPENED,
-};
+const ControlDraw = forwardRef<
+  { control?: LeafletControl.Draw; featureGroup: LeafletFeatureGroup },
+  ControlDrawProps
+>(({ draw = {}, edit, position = 'topleft', children, ...rest }, ref) => {
+  const { container } = useContainerContext<LeafletFeatureGroup>();
+  const controlRef = useRef<{ control?: LeafletControl.Draw }>({});
+  const { register } = useEvents();
 
-type Method = (event: LeafletEvent, featureGroup: LeafletFeatureGroup) => void;
-type Methods = {
-  onChange?: Method;
-  onCreated?: Method;
-  onEdited?: Method;
-  onDrawStart?: Method;
-  onDrawStop?: Method;
-  onDrawVertex?: Method;
-  onEditStart?: Method;
-  onEditMove?: Method;
-  onEditResize?: Method;
-  onEditVertex?: Method;
-  onEditStop?: Method;
-  onDeleted?: Method;
-  onDeleteStart?: Method;
-  onDeleteStop?: Method;
-  onMarkerContext?: Method;
-  onToolbarClosed?: Method;
-  onToolbarOpened?: Method;
-};
+  const createControl = useCallback(() => {
+    if (!container) return;
 
-type ControlDrawProps = LeafletControl.DrawConstructorOptions & Methods;
+    return new LeafletControl.Draw({
+      draw,
+      position,
+      edit: {
+        ...edit,
+        featureGroup: container,
+      },
+    });
+  }, [container, draw, position, edit]);
 
-const ControlDraw = forwardRef<{ control?: LeafletControl.Draw }, ControlDrawProps>(
-  ({ draw = {}, edit, position = 'topleft', children, ...rest }, ref) => {
-    const { container } = useContainerContext<LeafletFeatureGroup>();
-    const { register } = useEvents();
+  const { map } = useControl({
+    createControl,
+    controlRef,
+  });
 
-    const createControl = useCallback(() => {
-      if (!container) return;
+  useImperativeHandle(
+    ref,
+    () => {
+      return {
+        control: controlRef.current.control,
+        featureGroup: container,
+      };
+    },
+    [controlRef],
+  );
 
-      return new LeafletControl.Draw({
-        draw,
-        position,
-        edit: {
-          ...edit,
-          featureGroup: container,
-        },
-      });
-    }, [container, draw, position, edit]);
+  const createHandler = useCallback(
+    (methodName: keyof Methods) => {
+      return (event: LeafletEvent) => {
+        if (methods[methodName]) methods[methodName]?.(event, container);
+      };
+    },
+    [container],
+  );
 
-    const { map } = useControl({
-      createControl,
-      ref,
+  const { onChange, onCreated, onEdited, ...methods } = rest;
+  const handleChange = useCallback(
+    (event: LeafletEvent) => {
+      if (onChange) onChange(event, container);
+    },
+    [container],
+  );
+
+  const handleCreated = useCallback(
+    (event: LeafletEvent) => {
+      if (container) container.addLayer(event?.layer);
+      if (onCreated) onCreated(event, container);
+    },
+    [container],
+  );
+
+  const handleEdited = useCallback(
+    (event: LeafletEvent) => {
+      if (onEdited) onEdited(event, container);
+      handleChange(event);
+    },
+    [container],
+  );
+
+  useEffect(() => {
+    const unregister = register(container, {
+      [FeatureGroupEvent.onLayerAdd]: handleChange,
+      [FeatureGroupEvent.onLayerRemove]: handleChange,
     });
 
-    const createHandler = useCallback(
-      (methodName: keyof Methods) => {
-        return (event: LeafletEvent) => {
-          if (methods[methodName]) methods[methodName]?.(event, container);
-        };
-      },
-      [container],
-    );
+    return () => {
+      unregister(container);
+    };
+  }, [container, createHandler]);
 
-    const { onChange, onCreated, onEdited, ...methods } = rest;
-    const handleChange = useCallback(
-      (event: LeafletEvent) => {
-        if (onChange) onChange(event, container);
-      },
-      [container],
-    );
+  useEffect(() => {
+    const events: Events = {};
+    Object.keys(methods || {}).forEach((eventName) => {
+      events[ControlDrawEvent[eventName]] = createHandler(eventName);
+    });
 
-    const handleCreated = useCallback(
-      (event: LeafletEvent) => {
-        if (container) container.addLayer(event?.layer);
-        if (onCreated) onCreated(event, container);
-      },
-      [container],
-    );
+    const unregister = register(map, {
+      [ControlDrawEvent.onCreated]: handleCreated,
+      [ControlDrawEvent.onEdited]: handleEdited,
+      ...events,
+    });
 
-    const handleEdited = useCallback(
-      (event: LeafletEvent) => {
-        if (onEdited) onEdited(event, container);
-        handleChange(event);
-      },
-      [container],
-    );
+    return () => {
+      unregister(map);
+    };
+  }, [handleCreated, createHandler]);
 
-    useEffect(() => {
-      const unregister = register(container, {
-        [FeatureGroupEvent.onLayerAdd]: handleChange,
-        [FeatureGroupEvent.onLayerRemove]: handleChange,
-      });
-
-      return () => {
-        unregister(container);
-      };
-    }, [container, createHandler]);
-
-    useEffect(() => {
-      const events: Events = {};
-      Object.keys(methods || {}).forEach((eventName) => {
-        events[ControlDrawEvent[eventName]] = createHandler(eventName);
-      });
-
-      const unregister = register(map, {
-        [ControlDrawEvent.onCreated]: handleCreated,
-        [ControlDrawEvent.onEdited]: handleEdited,
-        ...events,
-      });
-
-      return () => {
-        unregister(map);
-      };
-    }, [handleCreated, createHandler]);
-
-    return null;
-  },
-);
+  return null;
+});
 
 type DrawPlaygroundProps = ControlDrawProps & {
   children?: React.ReactNode;

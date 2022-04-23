@@ -4,9 +4,9 @@ import { ContainerProvider, useContainerContext } from '../../contexts/containte
 import useLayer from '../../hooks/useLayer';
 import { useQuicklyEvents } from '../../hooks/useEvents';
 import useEvents from './useEvents';
-import type { MarkerLayerProps } from './types';
+import type { MarkerProps } from './types';
 
-const _Marker = forwardRef<{ layer?: LeafletMarker }, MarkerLayerProps>(
+const _Marker = forwardRef<{ layer?: LeafletMarker }, MarkerProps>(
   ({ latlng, children, ...props }, ref) => {
     const { container } = useContainerContext();
     const { options, events } = useEvents(props);

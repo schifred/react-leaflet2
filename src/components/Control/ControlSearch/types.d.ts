@@ -7,5 +7,5 @@ export type Record = {
 };
 
 export type ControlSearchProps = {
-  onSearch: (text: string) => Promise<Record[]>;
+  onSearch?: (text: string) => Promise<Record[]>;
 } & Pick<Control.ScaleOptions, 'position'>;

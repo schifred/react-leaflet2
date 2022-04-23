@@ -24,7 +24,12 @@ const EnhancedMap = forwardRef<{ map?: LeafletMap }, EnhancedMapProps>(
     ref,
   ) => {
     return (
-      <Map {...props} zoomControl={controls.includes('zoom')} ref={ref}>
+      <Map
+        {...props}
+        zoomControl={controls.includes('zoom')}
+        attributionControl={controls.includes('attribution')}
+        ref={ref}
+      >
         {controls.includes('layers') && (
           <ControlLayers>
             {layers?.map((layer) => {
@@ -40,7 +45,7 @@ const EnhancedMap = forwardRef<{ map?: LeafletMap }, EnhancedMapProps>(
           </ControlLayers>
         )}
 
-        {!controls.includes('layers') && layers?.length === 1 && (
+        {!controls.includes('layers') && tileLayers?.length === 1 && (
           <Fragment>
             {tileLayers?.map((tileLayer) => {
               return <TileLayer key={tileLayer.url} {...tileLayer} />;
@@ -48,7 +53,6 @@ const EnhancedMap = forwardRef<{ map?: LeafletMap }, EnhancedMapProps>(
           </Fragment>
         )}
 
-        {controls.includes('attribution') && <ControlAttribution />}
         {controls.includes('scale') && <ControlScale />}
         {controls.includes('fullscreen') && <ControlFullscreen />}
         {controls.includes('search') && <ControlSearch onSearch={onSearch} />}

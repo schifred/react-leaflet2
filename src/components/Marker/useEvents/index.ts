@@ -2,9 +2,9 @@ import { useMemo } from 'react';
 import { Marker as LeafletMarker, MarkerOptions } from 'leaflet';
 import { Events, Methods } from './events';
 import type { EventHandler } from '../../../types';
-import type { MarkerLayerProps } from '../types';
+import type { MarkerProps } from '../types';
 
-const useEvents = (props?: Omit<MarkerLayerProps, 'latlng' | 'children'>) => {
+const useEvents = (props?: Omit<MarkerProps, 'latlng' | 'children'>) => {
   const { options, events } = useMemo(() => {
     const options: MarkerOptions = {};
     const events: Record<string, EventHandler<any, LeafletMarker>> = {};
