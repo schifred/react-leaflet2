@@ -63,24 +63,32 @@ export const useQuicklyEvents = <T extends LeafletMap | LeafletLayer>(
   methods?: Methods<T>,
 ) => {
   const { register } = useEvents();
+  const unregisterRef = useRef<(src?: T) => void>();
 
-  const createHandler = useCallback((methodName: keyof Methods<T>, src) => {
-    return (event: LeafletEvent) => {
-      if (methods?.[methodName]) methods[methodName]?.(event, src);
-    };
-  }, []);
+  const createHandler = useCallback(
+    (methodName: keyof Methods<T>, src) => {
+      return (event: LeafletEvent) => {
+        if (methods?.[methodName]) methods[methodName]?.(event, src);
+      };
+    },
+    [methods],
+  );
 
   useEffect(() => {
-    const events: Events = {};
-    Object.keys(methods || {}).forEach((eventName) => {
-      events[eventName] = createHandler(eventName, src);
-    });
-    const unregister = register(src, events);
+    if (src) {
+      const events: Events = {};
+      Object.keys(methods || {}).forEach((eventName) => {
+        events[eventName] = createHandler(eventName, src);
+      });
+      unregisterRef.current = register(src, events);
+    }
+  }, [src, createHandler, methods]);
 
+  useEffect(() => {
     return () => {
-      unregister(src);
+      unregisterRef.current?.(src);
     };
-  }, [src, createHandler]);
+  }, []);
 };
 
 export default useEvents;

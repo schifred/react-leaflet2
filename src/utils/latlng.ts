@@ -1,3 +1,3 @@
-import { latLng } from 'leaflet';
+import { latLng, latLngBounds } from 'leaflet';
 
-export { latLng };
+export { latLng, latLngBounds };

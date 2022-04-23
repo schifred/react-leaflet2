@@ -7,9 +7,11 @@ import {
 } from 'leaflet';
 
 type Container = LeafletMap | LeafletFeatureGroup | LeafletLayerGroup;
+type OverlayContainer = Layer;
 
 type ContainerContextType = {
   container: Container;
+  overlayContainer?: OverlayContainer;
 };
 
 const ContainerContext = createContext<ContainerContextType>({} as ContainerContextType);
@@ -17,8 +19,9 @@ const ContainerContext = createContext<ContainerContextType>({} as ContainerCont
 export const ContainerProvider = ContainerContext.Provider;
 
 export const useContainerContext = <T extends Container>() => {
-  const { container } = useContext(ContainerContext);
+  const { container, overlayContainer } = useContext(ContainerContext);
   return {
     container: container as T,
+    overlayContainer,
   };
 };

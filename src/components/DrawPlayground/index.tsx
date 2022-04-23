@@ -7,7 +7,7 @@ import Leaflet, {
 import 'leaflet-draw';
 // import 'leaflet-draw/dist/leaflet.draw-src.js';
 import 'leaflet-draw/dist/leaflet.draw.css';
-import FeatureGroup, { FeatureGroupEvent } from '../FeatureGroup';
+import FeatureGroup, { FeatureGroupEvent } from '../Group/FeatureGroup';
 import useControl from '../../hooks/useControl';
 import useEvents, { Events } from '../../hooks/useEvents';
 import { useContainerContext } from '../../contexts/containter';

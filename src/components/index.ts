@@ -1,31 +1,15 @@
 import Map from './Map';
-import LayerGroup from './LayerGroup';
-import FeatureGroup from './FeatureGroup';
-import GridLayer from './GridLayer';
-import TileLayer from './TileLayer';
-import Polyline from './Polyline';
-import Polygon from './Polygon';
-import Rectangle from './Rectangle';
-import Circle from './Circle';
-import GeoJSON from './GeoJSON';
+export * from './Group';
+export * from './Layer';
+export * from './Path';
+import GeoJson from './GeoJson';
 import WKT from './WKT';
 import Marker from './Marker';
-import ControlLayers from './ControlLayers';
+export * from './Overlay';
+export * from './Control';
 import DrawPlayground from './DrawPlayground';
 
-export {
-  Map,
-  LayerGroup,
-  FeatureGroup,
-  GridLayer,
-  TileLayer,
-  Polyline,
-  Polygon,
-  Rectangle,
-  Circle,
-  GeoJSON,
-  WKT,
-  Marker,
-  ControlLayers,
-  DrawPlayground,
-};
+export { Map, GeoJson };
+export { WKT };
+export { Marker };
+export { DrawPlayground };
