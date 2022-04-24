@@ -1,15 +1,15 @@
 import React, { forwardRef, useCallback } from 'react';
-import { Layer as LeafletLayer, FeatureGroup as LeafletLayerGroup, LayerOptions } from 'leaflet';
+import { FeatureGroup as LeafletLayerGroup } from 'leaflet';
 import useLayer from '../../../hooks/useLayer';
 import { ContainerProvider } from '../../../contexts/containter';
-
-type LayerGroupProps = {
-  children?: React.ReactNode;
-  layers?: LeafletLayer[];
-} & LayerOptions;
+import { useQuicklyEvents } from '../../../hooks/useEvents';
+import useEvents from './useEvents';
+import { LayerGroupProps } from './types';
 
 const LayerGroup = forwardRef<{ layer?: LeafletLayerGroup }, LayerGroupProps>(
-  ({ children, layers, ...options }, ref) => {
+  ({ children, layers, ...props }, ref) => {
+    const { options, events } = useEvents(props);
+
     const createLayer = useCallback(() => {
       return new LeafletLayerGroup(layers, options);
     }, [layers, options]);
@@ -18,6 +18,8 @@ const LayerGroup = forwardRef<{ layer?: LeafletLayerGroup }, LayerGroupProps>(
       createLayer,
       ref,
     });
+
+    useQuicklyEvents(layer, events);
 
     return layer ? (
       <ContainerProvider

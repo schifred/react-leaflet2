@@ -1,13 +1,13 @@
 import { useMemo } from 'react';
-import { FeatureGroup, LayerOptions } from 'leaflet';
+import { LayerGroup, LayerOptions } from 'leaflet';
 import { Events, Methods } from './events';
 import type { EventHandler } from '../../../../types';
-import type { FeatureGroupProps } from '../types';
+import type { LayerGroupProps } from '../types';
 
-const useEvents = (props?: Omit<FeatureGroupProps, 'latlng' | 'fit' | 'children'>) => {
+const useEvents = (props?: Omit<LayerGroupProps, 'latlng' | 'fit' | 'children'>) => {
   const { options, events } = useMemo(() => {
     const options: LayerOptions = {};
-    const events: Record<string, EventHandler<any, FeatureGroup>> = {};
+    const events: Record<string, EventHandler<any, LayerGroup>> = {};
     Object.keys(props || {}).forEach((propName) => {
       const propsTemp = { ...props };
       if (propName in Events) {

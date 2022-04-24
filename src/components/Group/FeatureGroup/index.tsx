@@ -1,35 +1,14 @@
 import React, { forwardRef, useCallback } from 'react';
-import {
-  Layer as LeafletLayer,
-  FeatureGroup as LeafletFeatureGroup,
-  LayerOptions,
-  LeafletEvent,
-} from 'leaflet';
+import { FeatureGroup as LeafletFeatureGroup } from 'leaflet';
 import useLayer from '../../../hooks/useLayer';
 import { ContainerProvider } from '../../../contexts/containter';
 import { useQuicklyEvents } from '../../../hooks/useEvents';
+import useEvents from './useEvents';
 import { FeatureGroupProps } from './types';
 
-export const FeatureGroupEvent = {
-  onLayerAdd: 'layeradd',
-  onLayerRemove: 'layerremove',
-};
-
-type Method = (event: LeafletEvent, featureGroup: LeafletFeatureGroup) => void;
-type Methods = {
-  onLayerAdd?: Method;
-  onLayerRemove?: Method;
-};
-
-type FeatureGroupProps = {
-  children?: React.ReactNode;
-  layers?: LeafletLayer[];
-} & Methods &
-  LayerOptions;
-
 const FeatureGroup = forwardRef<{ layer?: LeafletFeatureGroup }, FeatureGroupProps>(
-  (props, ref) => {
-    const { children, layers, onLayerAdd, onLayerRemove, ...options } = props;
+  ({ children, layers, ...props }, ref) => {
+    const { options, events } = useEvents(props);
 
     const createLayer = useCallback(() => {
       return new LeafletFeatureGroup(layers, options);
@@ -40,7 +19,7 @@ const FeatureGroup = forwardRef<{ layer?: LeafletFeatureGroup }, FeatureGroupPro
       ref,
     });
 
-    useQuicklyEvents(layer, { onLayerAdd, onLayerRemove });
+    useQuicklyEvents(layer, events);
 
     return layer ? (
       <ContainerProvider
