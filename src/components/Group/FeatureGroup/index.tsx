@@ -8,6 +8,7 @@ import {
 import useLayer from '../../../hooks/useLayer';
 import { ContainerProvider } from '../../../contexts/containter';
 import { useQuicklyEvents } from '../../../hooks/useEvents';
+import { FeatureGroupProps } from './types';
 
 export const FeatureGroupEvent = {
   onLayerAdd: 'layeradd',
