@@ -3,9 +3,9 @@ import { Map as LeafletMap } from 'leaflet';
 import {
   Map,
   TileLayer,
+  FeatureGroup,
   ControlLayers,
   ControlScale,
-  ControlAttribution,
   ControlFullscreen,
   ControlSearch,
 } from '../../components';
@@ -36,9 +36,15 @@ const EnhancedMap = forwardRef<{ map?: LeafletMap }, EnhancedMapProps>(
               const { tileLayers, ...rest } = layer;
               return (
                 <ControlLayers.ControlLayer key={rest.name} {...rest}>
-                  {tileLayers.map((tileLayer) => {
-                    return <TileLayer key={tileLayer.url} {...tileLayer} />;
-                  })}
+                  {tileLayers.length === 1 ? (
+                    <TileLayer key={tileLayers[0].url} {...tileLayers[0]} />
+                  ) : (
+                    <FeatureGroup>
+                      {tileLayers.map((tileLayer) => {
+                        return <TileLayer key={tileLayer.url} {...tileLayer} />;
+                      })}
+                    </FeatureGroup>
+                  )}
                 </ControlLayers.ControlLayer>
               );
             })}

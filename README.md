@@ -1,4 +1,4 @@
-# chaos-react-leaflet
+# react-leaflet2
 
 地图渲染。
 
@@ -9,14 +9,14 @@
 ## 📦 Install
 
 ```
-npm i chaos-react-leaflet --save
+npm i react-leaflet2 --save
 ```
 
 ## 🔨 Usage
 
 ```tsx
 import React, { Fragment } from 'react';
-import { Map, WKT, TileLayer, latLng, Popup } from 'chaos-react-leaflet';
+import { Map, WKT, TileLayer, latLng, Popup } from 'react-leaflet2';
 import 'leaflet/dist/leaflet.css';
 
 const ACCESS_TOKEN =
@@ -52,7 +52,7 @@ export default () => {
 ## 🖥 Development
 
 ```
-$ git clone https://github.com/Alfred-sg/chaos-react-leaflet
+$ git clone https://github.com/Alfred-sg/react-leaflet2
 $ npm install
 $ npm run docs
 ```
@@ -60,6 +60,8 @@ $ npm run docs
 打开浏览器访问 http://127.0.0.1:8000。
 
 ## 参考
+
+- [mapbox.js](https://docs.mapbox.com/mapbox.js)
 
 ## LICENSE
 

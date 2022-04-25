@@ -4,7 +4,6 @@ import { MapProvider } from '../../contexts/map';
 import { ContainerProvider } from '../../contexts/containter';
 import { useQuicklyEvents } from '../../hooks/useEvents';
 import useEvents from './useEvents';
-import 'leaflet/dist/leaflet.css';
 import type { MapProps } from './types';
 
 const Map = forwardRef<{ map?: LeafletMap }, MapProps>(
@@ -56,7 +55,7 @@ const Map = forwardRef<{ map?: LeafletMap }, MapProps>(
     }, [bounds]);
 
     return (
-      <div className="chaos-react-leaflet" ref={containerRef} style={style}>
+      <div className="react-leaflet2" ref={containerRef} style={style}>
         {map ? (
           <MapProvider value={{ map }}>
             <ContainerProvider value={{ container: map }}>{children}</ContainerProvider>

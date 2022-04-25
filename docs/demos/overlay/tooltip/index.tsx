@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Map, WKT, TileLayer, latLng, Tooltip } from 'chaos-react-leaflet';
+import { Map, WKT, TileLayer, latLng, Tooltip } from 'react-leaflet2';
 import 'leaflet/dist/leaflet.css';
 
 const ACCESS_TOKEN =

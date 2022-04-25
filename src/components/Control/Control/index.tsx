@@ -3,7 +3,7 @@ import { Control as LeafletControl } from 'leaflet';
 import useControl from '../../../hooks/useControl';
 import { ControlProps } from './types';
 
-const ControlSearch = forwardRef<
+const Control = forwardRef<
   // @ts-ignore
   { control?: LeafletControl },
   ControlProps
@@ -28,4 +28,4 @@ const ControlSearch = forwardRef<
   return null;
 });
 
-export default ControlSearch;
+export default Control;

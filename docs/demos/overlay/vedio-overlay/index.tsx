@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Map, TileLayer, latLng, latLngBounds, VedioOverlay } from 'chaos-react-leaflet';
+import { Map, TileLayer, latLng, latLngBounds, VedioOverlay } from 'react-leaflet2';
 import 'leaflet/dist/leaflet.css';
 
 const ACCESS_TOKEN =

@@ -1,5 +1,5 @@
 import React, { useState, Fragment } from 'react';
-import { Position, Tooltip, latLng } from 'chaos-react-leaflet';
+import { Position, Tooltip, latLng } from 'react-leaflet2';
 import 'leaflet/dist/leaflet.css';
 
 const ACCESS_TOKEN =

@@ -1,6 +1,8 @@
 import React, { Fragment } from 'react';
-import { Map, WKT, TileLayer, latLng, Popup } from 'react-leaflet2';
-import 'leaflet/dist/leaflet.css';
+import { Map, TileLayer, Control, latLng } from 'react-leaflet2';
+import Leaflet from 'leaflet';
+import 'leaflet-routing-machine';
+import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
 
 const ACCESS_TOKEN =
   'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw';
@@ -10,22 +12,19 @@ const MB_ATTR =
 const MB_URL =
   'https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token=' + ACCESS_TOKEN;
 
-const position = latLng(30.271486, 120.160136);
-
-const wkt =
-  'POLYGON((120.1161003112793 30.30691909894813,120.12451171875 30.30709076032508,120.11833190917969 30.301082612131722,120.1161003112793 30.30691909894813))';
-
 export default () => {
   return (
     <Fragment>
-      <Map center={position} zoom={14} style={{ width: '100%', height: 400 }}>
+      <Map center={latLng(57.72, 11.945)} zoom={14} style={{ width: '100%', height: 400 }}>
         <TileLayer url={MB_URL} attribution={MB_ATTR} id="light-v9" />
 
-        <WKT wkt={wkt} fit>
-          <Popup visible>
-            <div>this is a popup</div>
-          </Popup>
-        </WKT>
+        <Control
+          createControl={() =>
+            Leaflet.Routing.control({
+              waypoints: [latLng(57.74, 11.94), latLng(57.6792, 11.949)],
+            })
+          }
+        />
       </Map>
     </Fragment>
   );

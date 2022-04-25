@@ -1,3 +1,5 @@
+import './index.less';
+
 export { GridLayer, CRS, Renderer, LatLng, LatLngBounds, Point, Bounds } from 'leaflet';
 // @ts-ignore
 export { default as Wicket } from 'wicket';

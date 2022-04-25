@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Map, TileLayer, latLng, ControlLayers, FeatureGroup } from 'chaos-react-leaflet';
+import { Map, TileLayer, latLng, ControlLayers, FeatureGroup } from 'react-leaflet2';
 import { TileLayer as LeafletTileLayer } from 'leaflet';
 import 'leaflet.chinatmsproviders';
 import 'leaflet/dist/leaflet.css';
