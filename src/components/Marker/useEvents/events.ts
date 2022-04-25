@@ -1,12 +1,5 @@
-import {
-  Marker as LeafletMarker,
-  LayerEvent,
-  LeafletEvent,
-  PopupEvent,
-  TooltipEvent,
-  LeafletMouseEvent,
-  DragEndEvent,
-} from 'leaflet';
+import { Marker as LeafletMarker, LeafletEvent, DragEndEvent } from 'leaflet';
+import { InteractiveEvents, LayerEvents, PopupEvents, TooltipEvents } from '../../_events';
 import type { EventHandler } from '../../../types';
 
 export const Events = {
@@ -16,19 +9,10 @@ export const Events = {
   onDrag: 'drag',
   onDragEnd: 'dragend',
   onMoveEnd: 'moveend',
-  onClick: 'click',
-  onDblClick: 'dblclick',
-  onMouseDown: 'mousedown',
-  onMouseUp: 'mouseup',
-  onMouseOver: 'mouseover',
-  onMouseOut: 'mouseout',
-  onContextMenu: 'contextmenu',
-  onAdd: 'add',
-  onRemove: 'remove',
-  onPopupOpen: 'popupopen',
-  onPopupClose: 'popupclose',
-  onTooltipOpen: 'tooltipopen',
-  onTooltipClose: 'tooltipclose',
+  ...InteractiveEvents.Events,
+  ...LayerEvents.Events,
+  ...PopupEvents.Events,
+  ...TooltipEvents.Events,
 };
 
 export type Methods = {
@@ -38,17 +22,7 @@ export type Methods = {
   onDrag?: EventHandler<LeafletEvent, LeafletMarker>;
   onDragEnd?: EventHandler<DragEndEvent, LeafletMarker>;
   onMoveEnd?: EventHandler<LeafletEvent, LeafletMarker>;
-  onClick?: EventHandler<LeafletMouseEvent, LeafletMarker>;
-  onDblClick?: EventHandler<LeafletMouseEvent, LeafletMarker>;
-  onMouseDown?: EventHandler<LeafletMouseEvent, LeafletMarker>;
-  onMouseUp?: EventHandler<LeafletMouseEvent, LeafletMarker>;
-  onMouseOver?: EventHandler<LeafletMouseEvent, LeafletMarker>;
-  onMouseOut?: EventHandler<LeafletMouseEvent, LeafletMarker>;
-  onContextMenu?: EventHandler<LeafletMouseEvent, LeafletMarker>;
-  onAdd?: EventHandler<LayerEvent, LeafletMarker>;
-  onRemove?: EventHandler<LayerEvent, LeafletMarker>;
-  onPopupOpen?: EventHandler<PopupEvent, LeafletMarker>;
-  onPopupClose?: EventHandler<PopupEvent, LeafletMarker>;
-  onTooltipOpen?: EventHandler<TooltipEvent, LeafletMarker>;
-  onTooltipClose?: EventHandler<TooltipEvent, LeafletMarker>;
-};
+} & InteractiveEvents.Methods<LeafletMarker> &
+  LayerEvents.Methods<LeafletMarker> &
+  PopupEvents.Methods<LeafletMarker> &
+  TooltipEvents.Methods<LeafletMarker>;

@@ -1,6 +1,4 @@
 import Leaflet, { FeatureGroup as LeafletFeatureGroup, LeafletEvent } from 'leaflet';
-import 'leaflet-draw';
-import 'leaflet-draw/dist/leaflet.draw.css';
 import type { EventHandler } from '../../types';
 import './language';
 
