@@ -15,9 +15,11 @@ const ControlSearch = forwardRef<
     return new LeafletControl.Search({
       position,
       sourceData: (text: string, cb: (records: Record[]) => void) => {
-        onSearch(text).then((records) => {
-          if (records) cb(records);
-        });
+        if (onSearch) {
+          onSearch(text).then((records) => {
+            if (records) cb(records);
+          });
+        }
       },
       filterData: (text: string, records: Record[]) => records,
       textPlaceholder: '搜索',

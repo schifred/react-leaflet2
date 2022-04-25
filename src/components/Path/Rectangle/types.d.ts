@@ -6,4 +6,5 @@ export type RectangleProps = {
   latlngs: LatLngBoundsExpression;
   fit?: boolean;
   children?: React.ReactNode;
-} & PolylineOptions;
+} & PolylineOptions &
+  Methods;

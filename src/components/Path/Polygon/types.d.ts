@@ -6,4 +6,5 @@ export type PolygonProps = {
   latlngs: LatLngExpression[] | LatLngExpression[][] | LatLngExpression[][][];
   fit?: boolean;
   children?: React.ReactNode;
-} & PolylineOptions;
+} & PolylineOptions &
+  Methods;

@@ -9,7 +9,7 @@ export type WKTProps = (
   | Omit<PolylineProps, 'latlngs'>
   | Omit<PolygonProps, 'latlngs'>
   | Omit<RectangleProps, 'latlngs'>
-  | Omit<CircleProps, 'latlngs'>
+  | Omit<CircleProps, 'latlng'>
 ) & {
   wkt: string;
   children?: React.ReactNode;

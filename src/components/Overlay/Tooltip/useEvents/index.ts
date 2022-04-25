@@ -13,9 +13,11 @@ const useEvents = (props?: Omit<TooltipProps, 'latlng' | 'visible' | 'children'>
       if (propName in Events) {
         const methodName = propName as keyof Methods;
         const eventName = Events[methodName];
+        // @ts-ignore
         events[eventName] = propsTemp[methodName];
       } else {
         const optionName = propName as keyof TooltipOptions;
+        // @ts-ignore
         options[optionName] = propsTemp[optionName];
       }
     });

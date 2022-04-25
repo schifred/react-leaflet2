@@ -39,25 +39,23 @@ const draw = {
 
 export default () => {
   return (
-    <Fragment>
-      <Draw
-        center={position}
-        zoom={14}
-        controls={['zoom', 'scale', 'fullscreen', 'attribution', 'search']}
-        style={{ width: '100%', height: 400 }}
-        tileLayers={[
-          {
-            url: MB_URL,
-            attribution: MB_ATTR,
-            id: 'light-v9',
-          },
-        ]}
-        draw={draw}
-        wkt={wkt}
-        onChange={(data) => {
-          console.log(data);
-        }}
-      ></Draw>
-    </Fragment>
+    <Draw
+      center={position}
+      zoom={14}
+      controls={['zoom', 'scale', 'fullscreen', 'attribution', 'search']}
+      style={{ width: '100%', height: 400 }}
+      tileLayers={[
+        {
+          url: MB_URL,
+          attribution: MB_ATTR,
+          id: 'light-v9',
+        },
+      ]}
+      draw={draw}
+      wkt={wkt}
+      onChange={(data) => {
+        console.log(data);
+      }}
+    ></Draw>
   );
 };

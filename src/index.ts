@@ -1,4 +1,5 @@
 export { GridLayer, CRS, Renderer, LatLng, LatLngBounds, Point, Bounds } from 'leaflet';
+// @ts-ignore
 export { default as Wicket } from 'wicket';
 export * from './components';
 export * from './integration';

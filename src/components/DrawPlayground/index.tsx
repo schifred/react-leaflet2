@@ -38,6 +38,7 @@ const ControlDraw = forwardRef<
 
   const { map } = useControl({
     createControl,
+    // @ts-ignore
     controlRef,
   });
 
@@ -55,6 +56,7 @@ const ControlDraw = forwardRef<
   const createHandler = useCallback(
     (methodName: keyof Methods) => {
       return (event: LeafletEvent) => {
+        // @ts-ignore
         if (methods[methodName]) methods[methodName]?.(event, container);
       };
     },
@@ -99,6 +101,7 @@ const ControlDraw = forwardRef<
   useEffect(() => {
     const events: Events = {};
     Object.keys(methods || {}).forEach((eventName) => {
+      // @ts-ignore
       events[ControlDrawEvent[eventName]] = createHandler(eventName);
     });
 
@@ -124,6 +127,7 @@ const _DrawPlayground = forwardRef<{ control?: LeafletControl.Draw }, DrawPlaygr
   ({ children, ...props }, ref) => {
     return (
       <FeatureGroup>
+        {/* @ts-ignore */}
         <ControlDraw {...props} ref={ref} />
         {children}
       </FeatureGroup>

@@ -1,5 +1,6 @@
 import Leaflet from 'leaflet';
 
+// @ts-ignore
 Leaflet.drawLocal = {
   draw: {
     toolbar: {

@@ -13,9 +13,11 @@ const useEvents = (map?: LeafletMap, props?: Omit<MapProps, 'style' | 'children'
       if (propName in Events) {
         const methodName = propName as keyof Methods;
         const eventName = Events[methodName];
+        // @ts-ignore
         events[eventName] = propsTemp[methodName];
       } else {
         const optionName = propName as keyof MapOptions;
+        // @ts-ignore
         options[optionName] = propsTemp[optionName];
       }
     });

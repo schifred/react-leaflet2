@@ -35,6 +35,7 @@ const ImageOverlay = forwardRef<{ layer?: LeafletImageOverlay }, ImageOverlayPro
 
     useEffect(() => {
       if (layer && bounds) {
+        // @ts-ignore
         layer.setBounds(latLngBounds(bounds));
       }
     }, [bounds]);

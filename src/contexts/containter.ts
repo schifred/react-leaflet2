@@ -6,7 +6,14 @@ import {
   LayerGroup as LeafletLayerGroup,
 } from 'leaflet';
 
-type Container = LeafletMap | LeafletFeatureGroup | LeafletLayerGroup;
+type Container =
+  | LeafletMap
+  | LeafletFeatureGroup
+  | LeafletLayerGroup
+  | {
+      addLayer: LeafletLayerGroup['addLayer'];
+      removeLayer: LeafletLayerGroup['removeLayer'];
+    };
 type OverlayContainer = Layer;
 
 type ContainerContextType = {

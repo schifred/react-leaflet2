@@ -33,6 +33,7 @@ const SvgOverlay = forwardRef<{ layer?: LeafletSVGOverlay }, SvgOverlayProps>(
 
     useEffect(() => {
       if (layer && bounds) {
+        // @ts-ignore
         layer.setBounds(latLngBounds(bounds));
       }
     }, [bounds]);

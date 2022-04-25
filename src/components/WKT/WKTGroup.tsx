@@ -15,6 +15,7 @@ const WKTGroup = forwardRef<{ layer?: LeafletGeoJSON }, WKTGroupProps>(
     }, [wkt]);
 
     return (
+      // @ts-ignore
       <GeoJSON geojson={geojson} {...props} ref={ref}>
         {children}
       </GeoJSON>

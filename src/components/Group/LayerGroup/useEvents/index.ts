@@ -13,6 +13,7 @@ const useEvents = (props?: Omit<LayerGroupProps, 'latlng' | 'fit' | 'children'>)
       if (propName in Events) {
         const methodName = propName as keyof Methods;
         const eventName = Events[methodName];
+        // @ts-ignore
         events[eventName] = propsTemp[methodName];
       } else {
         const optionName = propName as keyof LayerOptions;

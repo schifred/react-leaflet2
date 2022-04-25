@@ -29,12 +29,14 @@ const VideoOverlay = forwardRef<{ layer?: LeafletVideoOverlay }, VideoOverlayPro
 
     useEffect(() => {
       if (layer && url) {
+        // @ts-ignore
         layer.setUrl(url);
       }
     }, [url]);
 
     useEffect(() => {
       if (layer && bounds) {
+        // @ts-ignore
         layer.setBounds(bounds);
       }
     }, [bounds]);

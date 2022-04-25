@@ -13,9 +13,11 @@ const useEvents = (props?: Omit<PopupProps, 'latlng' | 'visible' | 'children'>) 
       if (propName in Events) {
         const methodName = propName as keyof Methods;
         const eventName = Events[methodName];
+        // @ts-ignore
         events[eventName] = propsTemp[methodName];
       } else {
         const optionName = propName as keyof PopupOptions;
+        // @ts-ignore
         options[optionName] = propsTemp[optionName];
       }
     });

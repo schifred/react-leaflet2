@@ -8,6 +8,7 @@ import {
   GeometryUtil,
   LatLngLiteral,
 } from 'leaflet';
+// @ts-ignore
 import Wicket from 'wicket';
 
 /**

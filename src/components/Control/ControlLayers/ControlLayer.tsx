@@ -1,11 +1,11 @@
 import React, { useCallback } from 'react';
-import { Layer as LeafletLayer } from 'leaflet';
+import { Layer as LeafletLayer, LayerGroup } from 'leaflet';
 import { ContainerProvider, useContainerContext } from '../../../contexts/containter';
 import { useControlContext } from '../../../contexts/controlLayers';
 import { ControlLayerProp } from './types';
 
 const ControlLayer = ({ children, name, checked, overlay }: ControlLayerProp) => {
-  const { container } = useContainerContext();
+  const { container } = useContainerContext<LayerGroup>();
   const { control } = useControlContext();
 
   const addLayer = useCallback(
@@ -25,6 +25,8 @@ const ControlLayer = ({ children, name, checked, overlay }: ControlLayerProp) =>
     (layer: LeafletLayer) => {
       control?.removeLayer(layer);
       container?.removeLayer(layer);
+
+      return container;
     },
     [control, container],
   );

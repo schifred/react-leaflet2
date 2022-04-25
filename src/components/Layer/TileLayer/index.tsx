@@ -16,7 +16,7 @@ const TileLayer = forwardRef<{ layer?: LeafletTileLayer }, TileLayerProps>(
         return createTileLayer(options);
       }
 
-      return new LeafletTileLayer(url, options);
+      return new LeafletTileLayer(url!, options);
     }, [url, createTileLayer, options]);
 
     const { map, layer } = useLayer({

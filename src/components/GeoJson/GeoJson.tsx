@@ -1,5 +1,6 @@
 import React, { forwardRef, useMemo } from 'react';
 import { Path } from 'leaflet';
+// @ts-ignore
 import Wicket from 'wicket';
 import WKT from '../WKT/WKT';
 import { GeoJsonProps } from './types';
@@ -12,6 +13,7 @@ const GeoJsonGroup = forwardRef<{ layer?: Path }, GeoJsonProps>(
     }, []);
 
     return (
+      // @ts-ignore
       <WKT {...props} wkt={wkt}>
         {children}
       </WKT>

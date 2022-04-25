@@ -1,5 +1,6 @@
 import React, { forwardRef, useCallback, useEffect } from 'react';
 import { Path } from 'leaflet';
+// @ts-ignore
 import Wicket from 'wicket';
 import 'wicket/wicket-leaflet';
 import { ContainerProvider, useContainerContext } from '../../contexts/containter';

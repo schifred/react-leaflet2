@@ -25,6 +25,7 @@ const Position = forwardRef<{ map?: LeafletMap }, PositionProps>(
     );
 
     useEffect(() => {
+      // @ts-ignore
       if (ref?.current?.map) ref?.current?.map?.setView(latlngProp);
     }, [ref, latlngProp]);
 
