@@ -5,6 +5,7 @@ import ControlZoom from './ControlZoom';
 import ControlFullscreen from './ControlFullscreen';
 import ControlSearch from './ControlSearch';
 import Control from './Control';
+import ControlProvider from './ControlProvider';
 
 export {
   ControlLayers,
@@ -14,4 +15,5 @@ export {
   ControlFullscreen,
   ControlSearch,
   Control,
+  ControlProvider,
 };

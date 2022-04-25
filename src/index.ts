@@ -5,6 +5,7 @@ export { GridLayer, CRS, Renderer, LatLng, LatLngBounds, Point, Bounds } from 'l
 export { default as Wicket } from 'wicket';
 export * from './components';
 export * from './integration';
+export { useMapContext } from './contexts/map';
 export { latLng, latLngBounds } from './utils/latlng';
 export { convertWkt2GeoObject } from './utils/converts';
 export {

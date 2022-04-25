@@ -23,6 +23,10 @@ react-leaflet2 内置了以下控制器：
 
 <code src="./control/layers" />
 
-### 自定义
+### 自定义 1
 
 <code src="./control/custom" />
+
+### 自定义 2
+
+<code src="./control/provider" />
