@@ -7,13 +7,17 @@ import useEvents from './useEvents';
 import { TileLayerProps } from './types';
 
 const TileLayer = forwardRef<{ layer?: LeafletTileLayer }, TileLayerProps>(
-  ({ children, url, ...props }, ref) => {
+  ({ children, url, createTileLayer, ...props }, ref) => {
     const { container } = useContainerContext();
     const { options, events } = useEvents(props);
 
     const createLayer = useCallback(() => {
+      if (createTileLayer) {
+        return createTileLayer(options);
+      }
+
       return new LeafletTileLayer(url, options);
-    }, [url, options]);
+    }, [url, createTileLayer, options]);
 
     const { map, layer } = useLayer({
       createLayer,

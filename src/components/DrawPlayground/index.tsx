@@ -6,7 +6,8 @@ import {
 } from 'leaflet';
 import 'leaflet-draw';
 import 'leaflet-draw/dist/leaflet.draw.css';
-import FeatureGroup, { FeatureGroupEvent } from '../Group/FeatureGroup';
+import FeatureGroup from '../Group/FeatureGroup';
+import { Events as FeatureGroupEvents } from '../Group/FeatureGroup/useEvents/events';
 import useControl from '../../hooks/useControl';
 import useEvents, { Events } from '../../hooks/useEvents';
 import { useContainerContext } from '../../contexts/containter';
@@ -86,8 +87,8 @@ const ControlDraw = forwardRef<
 
   useEffect(() => {
     const unregister = register(container, {
-      [FeatureGroupEvent.onLayerAdd]: handleChange,
-      [FeatureGroupEvent.onLayerRemove]: handleChange,
+      [FeatureGroupEvents.onLayerAdd]: handleChange,
+      [FeatureGroupEvents.onLayerRemove]: handleChange,
     });
 
     return () => {

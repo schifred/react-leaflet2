@@ -10,7 +10,7 @@ import {
   ControlAttribution,
   ControlFullscreen,
   latLng,
-} from 'chaos-react-leaflet';
+} from 'react-leaflet-map';
 import 'leaflet/dist/leaflet.css';
 
 const ACCESS_TOKEN =

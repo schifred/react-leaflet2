@@ -1,7 +1,8 @@
 import React from 'react';
-import { TileLayerOptions } from 'leaflet';
+import { TileLayer as LeafletTileLayer, TileLayerOptions } from 'leaflet';
 
 export type TileLayerProps = {
-  url: string;
+  url?: string;
+  createTileLayer?: (options: TileLayerOptions) => LeafletTileLayer;
   children?: React.ReactNode;
 } & TileLayerOptions;
