@@ -9,7 +9,7 @@ import {
   getCenter,
   getArea,
   getWkt,
-} from 'react-leaflet-map';
+} from 'chaos-react-leaflet';
 import 'leaflet/dist/leaflet.css';
 
 const ACCESS_TOKEN =

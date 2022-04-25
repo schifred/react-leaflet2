@@ -12,7 +12,7 @@
     "declaration": true,
     "skipLibCheck": true,
     "paths": {
-      "react-leaflet-map": ["./src"]
+      "chaos-react-leaflet": ["./src"]
     },
     "allowSyntheticDefaultImports": true
   }

@@ -56,7 +56,7 @@ const Map = forwardRef<{ map?: LeafletMap }, MapProps>(
     }, [bounds]);
 
     return (
-      <div className="react-leaflet-map" ref={containerRef} style={style}>
+      <div className="chaos-react-leaflet" ref={containerRef} style={style}>
         {map ? (
           <MapProvider value={{ map }}>
             <ContainerProvider value={{ container: map }}>{children}</ContainerProvider>

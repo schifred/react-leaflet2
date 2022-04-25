@@ -1,4 +1,4 @@
-# react-leaflet-map
+# chaos-react-leaflet
 
 地图渲染。
 
@@ -9,14 +9,14 @@
 ## 📦 Install
 
 ```
-npm i react-leaflet-map --save
+npm i chaos-react-leaflet --save
 ```
 
 ## 🔨 Usage
 
 ```tsx
 import React, { Fragment } from 'react';
-import { Map, WKT, TileLayer, latLng, Popup } from 'react-leaflet-map';
+import { Map, WKT, TileLayer, latLng, Popup } from 'chaos-react-leaflet';
 import 'leaflet/dist/leaflet.css';
 
 const ACCESS_TOKEN =
@@ -52,7 +52,7 @@ export default () => {
 ## 🖥 Development
 
 ```
-$ git clone https://github.com/Alfred-sg/react-leaflet-map
+$ git clone https://github.com/Alfred-sg/chaos-react-leaflet
 $ npm install
 $ npm run docs
 ```
