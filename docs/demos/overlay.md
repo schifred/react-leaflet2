@@ -23,3 +23,7 @@ title: overlay
 ### SvgOverlay
 
 <code src="./overlay/svg-overlay" />
+
+### DivOverlay
+
+<code src="./overlay/div-overlay" />

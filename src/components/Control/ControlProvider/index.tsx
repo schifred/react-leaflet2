@@ -6,7 +6,7 @@ import { ControlProviderProps } from './types';
 
 const WrapControl = LeafletControl.extend({
   onAdd: () => {
-    return DomUtil.create('div', 'react-leaflet-wrap-control');
+    return DomUtil.create('div', 'react-leaflet2-wrap-control');
   },
 });
 
