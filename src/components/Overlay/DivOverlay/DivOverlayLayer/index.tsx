@@ -1,6 +1,9 @@
 import { Layer, DomUtil, Util, LatLng } from 'leaflet';
 import './index.less';
 
+/**
+ * @feat 跟随地图缩放
+ */
 const DivOverlayLayer = Layer.extend({
   options: {
     pane: 'overlayPane',
@@ -19,7 +22,7 @@ const DivOverlayLayer = Layer.extend({
     );
 
     this.getPane(this.options.pane).appendChild(this._container);
-    this.setLatlng(this.options.latlng);
+    this.update();
   },
 
   onRemove: function () {
@@ -27,12 +30,37 @@ const DivOverlayLayer = Layer.extend({
   },
 
   getEvents: function () {
-    return {};
+    return {
+      zoom: this.update,
+      viewreset: this.update,
+    };
+  },
+
+  update: function () {
+    this.setLatlng(this.options.latlng);
+    return this;
   },
 
   setLatlng: function (latlng: LatLng) {
-    const pos = this._map.latLngToLayerPoint(latlng).round();
-    DomUtil.setPosition(this._container, pos);
+    if (this._map) {
+      const pos = this._map.latLngToLayerPoint(latlng).round();
+      DomUtil.setPosition(this._container, pos);
+    }
+    return this;
+  },
+
+  bringToFront: function () {
+    if (this._map) {
+      DomUtil.toFront(this.container);
+    }
+    return this;
+  },
+
+  bringToBack: function () {
+    if (this._map) {
+      DomUtil.toBack(this._image);
+    }
+    return this;
   },
 });
 
