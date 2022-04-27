@@ -1,4 +1,4 @@
-import { Control as LeafletControl } from 'leaflet';
+import { Control } from 'leaflet';
 import { Methods } from './events';
 
-export type ControlDrawProps = LeafletControl.DrawConstructorOptions & Methods;
+export type ControlDrawProps = Control.DrawConstructorOptions & Methods;

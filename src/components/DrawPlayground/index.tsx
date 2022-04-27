@@ -12,13 +12,14 @@ import useControl from '../../hooks/useControl';
 import useEvents, { Events } from '../../hooks/useEvents';
 import { useContainerContext } from '../../contexts/containter';
 import './language';
+import getOptions from './getOptions';
 import { ControlDrawEvent, Methods } from './events';
 import { ControlDrawProps } from './types';
 
 const ControlDraw = forwardRef<
   { control?: LeafletControl.Draw; featureGroup: LeafletFeatureGroup },
   ControlDrawProps
->(({ draw = {}, edit, position = 'topleft', children, ...rest }, ref) => {
+>(({ draw, edit, position = 'topleft', children, ...rest }, ref) => {
   const { container } = useContainerContext<LeafletFeatureGroup>();
   const controlRef = useRef<{ control?: LeafletControl.Draw }>({});
   const { register } = useEvents();
@@ -26,11 +27,12 @@ const ControlDraw = forwardRef<
   const createControl = useCallback(() => {
     if (!container) return;
 
+    const options = getOptions({ draw, edit });
     return new LeafletControl.Draw({
-      draw,
       position,
+      draw: options.draw,
       edit: {
-        ...edit,
+        ...options.edit,
         featureGroup: container,
       },
     });

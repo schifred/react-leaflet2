@@ -61,6 +61,8 @@ $ npm run docs
 
 ## 参考
 
+- [leaflet](https://leafletjs.com)
+- [react-leaflet](https://react-leaflet.js.org)
 - [mapbox.js](https://docs.mapbox.com/mapbox.js)
 
 ## LICENSE
