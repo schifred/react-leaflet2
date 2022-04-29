@@ -2,7 +2,7 @@
 title: control
 ---
 
-react-leaflet2 内置了以下控制器：
+react-leaflet2 内置了以下控件：
 
 - ControlZoom: leaflet 内置功能
 - ControlAttribution: leaflet 内置功能
