@@ -1,5 +1,5 @@
 ---
-title: control
+title: Control
 ---
 
 react-leaflet2 内置了以下控件：
@@ -8,7 +8,7 @@ react-leaflet2 内置了以下控件：
 - ControlAttribution: leaflet 内置功能
 - ControlScale: leaflet 内置功能
 - ControlFullscreen: 基于 leaflet-fullscreen
-- ControlSearch: 基于 leaflet-search
+- ControlSearch: 搜索
 - ControlLayers: leaflet 内置功能
 
 ### 比例尺及全屏展示

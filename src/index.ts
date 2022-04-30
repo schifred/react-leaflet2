@@ -1,5 +1,3 @@
-import './index.less';
-
 import Leaflet from 'leaflet';
 export { Leaflet };
 export { GridLayer, CRS, Renderer, LatLng, LatLngBounds, Point, Bounds } from 'leaflet';

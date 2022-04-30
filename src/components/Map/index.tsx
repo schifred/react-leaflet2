@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useImperativeHandle, forwardRef } from 'react';
+import '../../index.less';
 import Leaflet, { Map as LeafletMap } from 'leaflet';
 import { MapProvider } from '../../contexts/map';
 import { ContainerProvider } from '../../contexts/containter';

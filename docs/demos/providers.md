@@ -1,5 +1,5 @@
 ---
-title: providers
+title: Provider
 ---
 
 结合 [leaflet-providers](https://github.com/leaflet-extras/leaflet-providers) 或 [Leaflet.ChineseTmsProviders](https://github.com/htoooth/Leaflet.ChineseTmsProviders) 使用示例。

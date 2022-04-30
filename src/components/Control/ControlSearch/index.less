@@ -1,0 +1,109 @@
+.react-leaflet2-control-search {
+  position: relative;
+
+  &.searching {
+    opacity: 0.75;
+  }
+
+  &-icon {
+    display: block;
+    width: 30px;
+    height: 30px;
+    line-height: 40px;
+    text-align: center;
+    background-color: white;
+    border-radius: 4px;
+  }
+
+  &.actived &-icon {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  &-wrap {
+    position: absolute;
+    top: -2px;
+    left: 30px;
+    width: 180px;
+    height: 32px;
+    overflow: hidden;
+    line-height: 32px;
+    background: #fff;
+    border: 1px solid #999;
+    border-color: rgba(0, 0, 0, 0.4);
+    border-radius: 0 3px 3px 0;
+    opacity: 0;
+    transition: opacity 0.1s;
+
+    input {
+      width: 180px;
+      height: 30px;
+      padding: 0 0 0 10px;
+      background: 0 0;
+      border: 0;
+      outline: 0;
+    }
+  }
+
+  &.actived &-wrap {
+    opacity: 1;
+  }
+
+  &-results {
+    position: absolute;
+    top: 31px;
+    left: 30px;
+    width: 180px;
+    border-radius: 0 0 3px 3px;
+
+    span {
+      display: block;
+      width: 160px;
+      padding: 0 10px;
+      overflow: hidden;
+      color: rgba(0, 0, 0, 0.75);
+      font-size: 12px;
+      line-height: 30px;
+      white-space: nowrap;
+      text-align: left;
+      text-overflow: ellipsis;
+      border-bottom: 1px solid #ddd;
+      border-bottom-color: rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+    }
+
+    span:hover {
+      background: #f8f8f8;
+      opacity: 1;
+    }
+  }
+
+  &.actived &-results {
+    background: #fff;
+    border: 1px solid #999;
+    border-color: rgba(0, 0, 0, 0.4);
+  }
+}
+
+.leaflet-right .react-leaflet2-control-search-results,
+.leaflet-right .react-leaflet2-control-search-wrap {
+  right: 30px;
+  left: auto;
+}
+
+.leaflet-right {
+  .react-leaflet2-control-search-wrap {
+    border-radius: 3px 0 0 3px;
+  }
+
+  .react-leaflet2-control-search.active,
+  .react-leaflet2-control-search.active .react-leaflet2-control-search-toggle {
+    border-radius: 0 3px 3px 0;
+  }
+}
+
+.leaflet-bottom .react-leaflet2-control-search-results {
+  top: auto;
+  bottom: 25px;
+  border-radius: 3px 3px 0 0;
+}

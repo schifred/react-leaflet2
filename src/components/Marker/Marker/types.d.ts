@@ -1,5 +1,5 @@
 import React from 'react';
-import Leaflet, { Marker, MapOptions, LatLngBoundsExpression } from 'leaflet';
+import Leaflet, { Marker, MarkerOptions, LatLngBoundsExpression } from 'leaflet';
 import { Events, Methods } from './useEvents/events';
 
 export type MarkerProps = {
