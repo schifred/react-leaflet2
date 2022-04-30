@@ -5,7 +5,7 @@ import useLayer from '../../hooks/useLayer';
 import { GeoJsonGroupProps } from './types';
 
 const GeoJsonGroup = forwardRef<{ layer?: LeafletGeoJSON }, GeoJsonGroupProps>(
-  ({ children, geojson, fit, ...options }, ref) => {
+  ({ children, geojson, fit, onMounted, ...options }, ref) => {
     const createLayer = useCallback(() => {
       return new LeafletGeoJSON(geojson, options);
     }, [geojson, options]);
@@ -14,6 +14,12 @@ const GeoJsonGroup = forwardRef<{ layer?: LeafletGeoJSON }, GeoJsonGroupProps>(
       createLayer,
       ref,
     });
+
+    useEffect(() => {
+      if (layer && onMounted) {
+        onMounted(layer);
+      }
+    }, [layer]);
 
     useEffect(() => {
       if (map && layer && fit) {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { GeoJSONOptions } from 'leaflet';
+import { GeoJSON, GeoJSONOptions } from 'leaflet';
 import { GeoJsonObject } from 'geojson';
 import { WKTProps } from '../WKT/types';
 
@@ -11,4 +11,5 @@ export type GeoJsonGroupProps = {
   children?: React.ReactNode;
   geojson?: GeoJsonObject;
   fit?: boolean;
+  onMounted?: (geojson: GeoJSON) => void;
 } & GeoJSONOptions;
