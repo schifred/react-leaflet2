@@ -1,21 +1,22 @@
 import { useMemo } from 'react';
-import { Marker as LeafletMarker, MarkerOptions } from 'leaflet';
+import { FeatureGroup, LayerOptions } from 'leaflet';
 import { Events, Methods } from './events';
-import type { EventHandler } from '../../../types';
-import type { MarkerProps } from '../types';
+import type { EventHandler } from '../../../../types';
+import type { MarkerClusterProps } from '../types';
 
-const useEvents = (props?: Omit<MarkerProps, 'latlng' | 'children'>) => {
+const useEvents = (props?: Omit<MarkerClusterProps, 'children'>) => {
   const { options, events } = useMemo(() => {
-    const options: MarkerOptions = {};
-    const events: Record<string, EventHandler<any, LeafletMarker>> = {};
+    const options: LayerOptions = {};
+    const events: Record<string, EventHandler<any, FeatureGroup>> = {};
     Object.keys(props || {}).forEach((propName) => {
       const propsTemp = { ...props };
       if (propName in Events) {
         const methodName = propName as keyof Methods;
         const eventName = Events[methodName];
+        // @ts-ignore
         events[eventName] = propsTemp[methodName];
       } else {
-        const optionName = propName as keyof MarkerOptions;
+        const optionName = propName as keyof LayerOptions;
         options[optionName] = propsTemp[optionName];
       }
     });

@@ -30,6 +30,7 @@ const ControlDraw = forwardRef<
     const options = getOptions({ draw, edit });
     return new LeafletControl.Draw({
       position,
+      // @ts-ignore
       draw: options.draw,
       edit: {
         ...options.edit,

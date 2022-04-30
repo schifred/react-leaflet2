@@ -7,7 +7,7 @@ import useEvents from './useEvents';
 import { PolygonProps } from './types';
 
 const Polygon = forwardRef<{ layer?: LeafletPolygon }, PolygonProps>(
-  ({ children, latlngs, fit, ...props }, ref) => {
+  ({ children, latlngs, fit, onMounted, ...props }, ref) => {
     const { container } = useContainerContext();
     const { options, events } = useEvents(props);
 
@@ -21,6 +21,12 @@ const Polygon = forwardRef<{ layer?: LeafletPolygon }, PolygonProps>(
     });
 
     useQuicklyEvents(layer, events);
+
+    useEffect(() => {
+      if (layer && onMounted) {
+        onMounted(layer);
+      }
+    }, [layer]);
 
     useEffect(() => {
       if (map && layer && fit) {

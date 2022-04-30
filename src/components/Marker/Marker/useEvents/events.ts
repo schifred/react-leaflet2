@@ -1,6 +1,6 @@
 import { Marker as LeafletMarker, LeafletEvent, DragEndEvent } from 'leaflet';
-import { InteractiveEvents, LayerEvents, PopupEvents, TooltipEvents } from '../../_events';
-import type { EventHandler } from '../../../types';
+import { InteractiveEvents, LayerEvents, PopupEvents, TooltipEvents } from '../../../_events';
+import type { EventHandler } from '../../../../types';
 
 export const Events = {
   onMove: 'move',

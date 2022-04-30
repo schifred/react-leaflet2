@@ -1,23 +1,21 @@
 import { useMemo } from 'react';
-import { ImageOverlay as LeafletImageOverlay, ImageOverlayOptions } from 'leaflet';
+import { Marker as LeafletMarker, MarkerOptions } from 'leaflet';
 import { Events, Methods } from './events';
 import type { EventHandler } from '../../../../types';
-import type { DivOverlayProps } from '../types';
+import type { MarkerProps } from '../types';
 
-const useEvents = (props?: Omit<DivOverlayProps, 'fit' | 'latlng' | 'children'>) => {
+const useEvents = (props?: Omit<MarkerProps, 'latlng' | 'children' | 'marker'>) => {
   const { options, events } = useMemo(() => {
-    const options: ImageOverlayOptions = {};
-    const events: Record<string, EventHandler<any, LeafletImageOverlay>> = {};
+    const options: MarkerOptions = {};
+    const events: Record<string, EventHandler<any, LeafletMarker>> = {};
     Object.keys(props || {}).forEach((propName) => {
       const propsTemp = { ...props };
       if (propName in Events) {
         const methodName = propName as keyof Methods;
         const eventName = Events[methodName];
-        // @ts-ignore
         events[eventName] = propsTemp[methodName];
       } else {
-        const optionName = propName as keyof ImageOverlayOptions;
-        // @ts-ignore
+        const optionName = propName as keyof MarkerOptions;
         options[optionName] = propsTemp[optionName];
       }
     });

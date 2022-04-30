@@ -32,6 +32,7 @@ const ControlProvider = forwardRef<
     }
   }, [position]);
 
+  // @ts-ignore
   return control?._container ? createPortal(children, control?._container) : null;
 });
 

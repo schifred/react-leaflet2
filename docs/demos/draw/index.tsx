@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react';
-import { DivIcon, featureGroup, Point } from 'leaflet';
 import {
   Map,
   WKT,
@@ -27,19 +26,6 @@ const wkt =
 
 const draw = {
   polygon: true,
-  // {
-  //   allowIntersection: false,
-  //   showArea: true,
-  //   metric: ['km', 'm'],
-  //   precision: {
-  //     m: 2,
-  //     km: 8,
-  //   },
-  //   touchIcon: new DivIcon({
-  //     iconSize: new Point(10, 10),
-  //     className: 'leaflet-div-icon leaflet-editing-icon leaflet-touch-icon',
-  //   }),
-  // },
   polyline: false,
   circle: false,
   rectangle: false,

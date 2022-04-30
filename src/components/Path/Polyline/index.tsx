@@ -7,7 +7,7 @@ import useEvents from './useEvents';
 import { PolylineProps } from './types';
 
 const Polyline = forwardRef<{ layer?: LeafletPolyline }, PolylineProps>(
-  ({ children, latlngs, fit, ...props }, ref) => {
+  ({ children, latlngs, fit, onMounted, ...props }, ref) => {
     const { container } = useContainerContext();
     const { options, events } = useEvents(props);
 
@@ -21,6 +21,12 @@ const Polyline = forwardRef<{ layer?: LeafletPolyline }, PolylineProps>(
     });
 
     useQuicklyEvents(layer, events);
+
+    useEffect(() => {
+      if (layer && onMounted) {
+        onMounted(layer);
+      }
+    }, [layer]);
 
     useEffect(() => {
       if (map && layer && fit) {

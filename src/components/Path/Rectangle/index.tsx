@@ -7,7 +7,7 @@ import useEvents from './useEvents';
 import { RectangleProps } from './types';
 
 const Rectangle = forwardRef<{ layer?: LeafletRectangle }, RectangleProps>(
-  ({ children, latlngs, fit, ...props }, ref) => {
+  ({ children, latlngs, fit, onMounted, ...props }, ref) => {
     const { container } = useContainerContext();
     const { options, events } = useEvents(props);
 
@@ -21,6 +21,12 @@ const Rectangle = forwardRef<{ layer?: LeafletRectangle }, RectangleProps>(
     });
 
     useQuicklyEvents(layer, events);
+
+    useEffect(() => {
+      if (layer && onMounted) {
+        onMounted(layer);
+      }
+    }, [layer]);
 
     useEffect(() => {
       if (map && layer && fit) {

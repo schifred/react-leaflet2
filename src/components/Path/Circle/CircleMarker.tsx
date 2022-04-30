@@ -7,7 +7,7 @@ import useEvents from './useEvents';
 import { CircleProps } from './types';
 
 const CircleMarker = forwardRef<{ layer?: LeafletCircleMarker }, CircleProps>(
-  ({ children, latlng, fit, ...props }, ref) => {
+  ({ children, latlng, fit, onMounted, ...props }, ref) => {
     const { container } = useContainerContext();
     const { options, events } = useEvents(props);
 
@@ -21,6 +21,12 @@ const CircleMarker = forwardRef<{ layer?: LeafletCircleMarker }, CircleProps>(
     });
 
     useQuicklyEvents(layer, events);
+
+    useEffect(() => {
+      if (layer && onMounted) {
+        onMounted(layer);
+      }
+    }, [layer]);
 
     useEffect(() => {
       if (layer && latlng) {
