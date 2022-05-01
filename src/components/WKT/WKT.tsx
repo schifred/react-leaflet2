@@ -10,26 +10,36 @@ import { WKTProps } from './types';
 /**
  * 单个图层
  */
-const WKT = forwardRef<{ layer?: Path }, WKTProps>(({ children, wkt, fit, ...props }, ref) => {
-  const { container } = useContainerContext();
-  const createLayer = useCallback(() => {
-    return new Wicket.Wkt(wkt).toObject(props);
-  }, [wkt, props]);
+const WKT = forwardRef<Path | undefined, WKTProps>(
+  ({ children, wkt, fit, onMounted, ...props }, ref) => {
+    const { container } = useContainerContext();
+    const createLayer = useCallback(() => {
+      return new Wicket.Wkt(wkt).toObject(props);
+    }, [wkt, props]);
 
-  const { map, layer } = useLayer({
-    createLayer,
-    ref,
-  });
+    const { map, layer } = useLayer({
+      createLayer,
+      ref,
+    });
 
-  useEffect(() => {
-    if (map && layer && fit) {
-      map?.fitBounds(layer.getBounds());
-    }
-  }, [map, layer, fit]);
+    useEffect(() => {
+      if (layer && onMounted) {
+        onMounted(layer);
+      }
+    }, [layer]);
 
-  return layer ? (
-    <ContainerProvider value={{ container, overlayContainer: layer }}>{children}</ContainerProvider>
-  ) : null;
-});
+    useEffect(() => {
+      if (map && layer && fit) {
+        map?.fitBounds(layer.getBounds());
+      }
+    }, [map, layer, fit]);
+
+    return layer ? (
+      <ContainerProvider value={{ container, overlayContainer: layer }}>
+        {children}
+      </ContainerProvider>
+    ) : null;
+  },
+);
 
 export default WKT;

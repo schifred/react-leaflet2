@@ -1,5 +1,5 @@
 import React from 'react';
-import Leaflet, { VideoOverlayOptions, LatLngBoundsExpression } from 'leaflet';
+import Leaflet, { VideoOverlay, VideoOverlayOptions, LatLngBoundsExpression } from 'leaflet';
 import { Events, Methods } from './useEvents/events';
 
 export type VideoOverlayProps = {
@@ -7,5 +7,6 @@ export type VideoOverlayProps = {
   url: string | string[];
   bounds: LatLngBoundsExpression;
   fit?: boolean;
+  onMounted?: (videoOverlay: VideoOverlay) => void;
 } & VideoOverlayOptions &
   Methods;

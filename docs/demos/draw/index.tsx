@@ -9,7 +9,6 @@ import {
   getArea,
   getWkt,
 } from 'react-leaflet2';
-import 'leaflet/dist/leaflet.css';
 
 const ACCESS_TOKEN =
   'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw';

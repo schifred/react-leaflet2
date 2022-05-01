@@ -1,4 +1,4 @@
-import React, { forwardRef, useCallback, useEffect } from 'react';
+import { forwardRef, useCallback, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import useLayer from '../../../hooks/useLayer';
 import { useQuicklyEvents } from '../../../hooks/useEvents';
@@ -6,8 +6,8 @@ import DivOverlayLayer from './DivOverlayLayer';
 import useEvents from './useEvents';
 import type { DivOverlayProps } from './types';
 
-const DivOverlay = forwardRef<{ layer?: typeof DivOverlayLayer }, DivOverlayProps>(
-  ({ children, fit, latlng, ...props }, ref) => {
+const DivOverlay = forwardRef<typeof DivOverlayLayer | undefined, DivOverlayProps>(
+  ({ children, fit, latlng, onMounted, ...props }, ref) => {
     const { options, events } = useEvents(props);
     const createLayer = useCallback(() => {
       // @ts-ignore
@@ -18,6 +18,12 @@ const DivOverlay = forwardRef<{ layer?: typeof DivOverlayLayer }, DivOverlayProp
       createLayer,
       ref,
     });
+
+    useEffect(() => {
+      if (layer && onMounted) {
+        onMounted(layer);
+      }
+    }, [layer]);
 
     useQuicklyEvents(layer, events);
 

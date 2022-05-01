@@ -8,7 +8,7 @@ import { WKTGroupProps } from './types';
 /**
  * 组合图层
  */
-const WKTGroup = forwardRef<{ layer?: LeafletGeoJSON }, WKTGroupProps>(
+const WKTGroup = forwardRef<LeafletGeoJSON | undefined, WKTGroupProps>(
   ({ children, wkt, ...props }, ref) => {
     const geojson = useMemo(() => {
       return convertWkt2GeoObject(wkt);

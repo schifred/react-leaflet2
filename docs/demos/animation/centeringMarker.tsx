@@ -1,5 +1,5 @@
 import React, { useRef, Fragment } from 'react';
-import Leaflet, { Map, TileLayer, Marker, latLng } from 'react-leaflet2';
+import { Leaflet, Map, TileLayer, Marker, latLng } from 'react-leaflet2';
 
 const ACCESS_TOKEN =
   'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw';
@@ -24,7 +24,7 @@ export default () => {
         <Marker
           latlng={latLng(37.75091740997017, -122.418157211908)}
           onClick={(e) => {
-            mapRef.current!.map.panTo(e.latlng);
+            if (mapRef.current) mapRef.current.panTo(e.latlng);
           }}
         />
       </Map>

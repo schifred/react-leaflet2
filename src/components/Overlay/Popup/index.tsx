@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useState } from 'react';
+import { forwardRef, useEffect, useState, useImperativeHandle } from 'react';
 import { createPortal } from 'react-dom';
 import { Popup as LeafletPopup } from 'leaflet';
 import { useContainerContext } from '../../../contexts/containter';
@@ -6,11 +6,19 @@ import { useQuicklyEvents } from '../../../hooks/useEvents';
 import useEvents from './useEvents';
 import type { PopupProps } from './types';
 
-const Popup = forwardRef<{ layer?: LeafletPopup }, PopupProps>(
-  ({ latlng, visible, children, ...props }, ref) => {
+const Popup = forwardRef<LeafletPopup | undefined, PopupProps>(
+  ({ latlng, visible, children, onMounted, ...props }, ref) => {
     const { overlayContainer } = useContainerContext();
     const { options, events } = useEvents(props);
     const [layer, setLayer] = useState<LeafletPopup>();
+
+    useImperativeHandle(ref, () => layer, [layer]);
+
+    useEffect(() => {
+      if (layer && onMounted) {
+        onMounted(layer);
+      }
+    }, [layer]);
 
     useEffect(() => {
       if (overlayContainer) {

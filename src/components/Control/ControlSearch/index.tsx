@@ -60,6 +60,7 @@ const ControlSearch = ({ onSearch, position }: ControlSearchProps) => {
   const handleInputKeyup = useCallback(
     (e: React.KeyboardEvent<HTMLInputElement>) => {
       if (e.key === 'Enter') {
+        // @ts-ignore
         handleSearch(e.target.value);
       }
     },

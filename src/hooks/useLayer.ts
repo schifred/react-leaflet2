@@ -8,21 +8,13 @@ const useLayer = <Layer extends LeafletLayer>({
   ref,
 }: {
   createLayer: () => Layer;
-  ref: React.ForwardedRef<{ layer?: Layer }>;
+  ref: React.ForwardedRef<Layer | undefined>;
 }) => {
   const [layer, setLayer] = useState<Layer>();
   const { map } = useMapContext();
   const { container } = useContainerContext();
 
-  useImperativeHandle(
-    ref,
-    () => {
-      return {
-        layer,
-      };
-    },
-    [layer],
-  );
+  useImperativeHandle(ref, () => layer, [layer]);
 
   useEffect(() => {
     if (container) {

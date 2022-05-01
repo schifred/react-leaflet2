@@ -1,8 +1,9 @@
-import { Layer as LeafletLayer, LayerOptions } from 'leaflet';
+import { Layer, LayerOptions, FeatureGroup } from 'leaflet';
 import { Methods } from './useEvents/events';
 
 export type FeatureGroupProps = {
   children?: React.ReactNode;
-  layers?: LeafletLayer[];
+  layers?: Layer[];
+  onMounted?: (featureGroup: FeatureGroup) => void;
 } & Methods &
   LayerOptions;

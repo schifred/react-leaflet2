@@ -1,12 +1,12 @@
 import React, { forwardRef, useCallback, useEffect } from 'react';
-import { Polyline as LeafletPolyline, PolylineOptions, LatLngExpression } from 'leaflet';
+import { Polyline as LeafletPolyline } from 'leaflet';
 import { ContainerProvider, useContainerContext } from '../../../contexts/containter';
 import useLayer from '../../../hooks/useLayer';
 import { useQuicklyEvents } from '../../../hooks/useEvents';
 import useEvents from './useEvents';
 import { PolylineProps } from './types';
 
-const Polyline = forwardRef<{ layer?: LeafletPolyline }, PolylineProps>(
+const Polyline = forwardRef<LeafletPolyline | undefined, PolylineProps>(
   ({ children, latlngs, fit, onMounted, ...props }, ref) => {
     const { container } = useContainerContext();
     const { options, events } = useEvents(props);

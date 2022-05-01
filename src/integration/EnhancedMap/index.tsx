@@ -11,7 +11,7 @@ import {
 } from '../../components';
 import { EnhancedMapProps } from './types';
 
-const EnhancedMap = forwardRef<{ map?: LeafletMap }, EnhancedMapProps>(
+const EnhancedMap = forwardRef<LeafletMap | undefined, EnhancedMapProps>(
   (
     {
       children,

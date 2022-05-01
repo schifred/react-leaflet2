@@ -10,7 +10,7 @@ const MB_URL =
   'https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token=' + ACCESS_TOKEN;
 
 export default () => {
-  const mapRef = useRef<{ map: Leaflet.Map }>();
+  const mapRef = useRef<Leaflet.Map>();
   const [latlngs, setLatlngs] = useState<Leaflet.LatLng[]>([]);
   const pointsAddedRef = useRef(0);
 
@@ -20,7 +20,7 @@ export default () => {
       latLng(Math.cos(pointsAddedRef.current / 20) * 30, pointsAddedRef.current),
     ]);
 
-    // mapRef.current?.map?.setView([0, pointsAddedRef.current], 3);
+    // mapRef.current?.setView([0, pointsAddedRef.current], 3);
     pointsAddedRef.current += 1;
 
     if (pointsAddedRef.current < 360) window.setTimeout(tick, 100);

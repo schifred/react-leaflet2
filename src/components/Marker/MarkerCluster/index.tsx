@@ -9,7 +9,7 @@ import { useQuicklyEvents } from '../../../hooks/useEvents';
 import useEvents from './useEvents';
 import { MarkerClusterProps } from './types';
 
-const MarkerCluster = forwardRef<{ layer?: LeafletFeatureGroup }, MarkerClusterProps>(
+const MarkerCluster = forwardRef<LeafletFeatureGroup | undefined, MarkerClusterProps>(
   ({ children, ...props }, ref) => {
     const { options, events } = useEvents(props);
 

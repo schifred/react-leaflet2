@@ -5,7 +5,7 @@ import { getCenter, getArea, getWkt, checkFeatureGroupContain } from '../../util
 import EnhancedMap from '../EnhancedMap';
 import { DrawProps, Points, Value } from './types';
 
-const Draw = forwardRef<{ map?: LeafletMap }, DrawProps>(
+const Draw = forwardRef<LeafletMap | undefined, DrawProps>(
   (
     {
       children,
@@ -78,10 +78,11 @@ const Draw = forwardRef<{ map?: LeafletMap }, DrawProps>(
           return <WKT key={getPloygonKey && getPloygonKey(ploygon)} {...ploygon} />;
         })}
 
-        {points?.map((point, index) => {
+        {points?.map((point) => {
           const { selected, ...rest } = point;
           return (
             <Marker
+              // @ts-ignore
               key={getPointKey && getPointKey(rest)}
               {...rest}
               icon={selected ? selectedIcon : unselectedIcon}

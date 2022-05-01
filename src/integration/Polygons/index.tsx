@@ -4,7 +4,7 @@ import { WKT } from '../../components';
 import EnhancedMap from '../EnhancedMap';
 import { PolygonsProps } from './types';
 
-const Polygons = forwardRef<{ map?: LeafletMap }, PolygonsProps>(
+const Polygons = forwardRef<LeafletMap | undefined, PolygonsProps>(
   ({ children, ploygons, getKey, ...props }, ref) => {
     return (
       <EnhancedMap {...props} ref={ref}>

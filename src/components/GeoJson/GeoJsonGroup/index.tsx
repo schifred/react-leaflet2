@@ -1,11 +1,15 @@
 import React, { forwardRef, useCallback, useEffect } from 'react';
-import { GeoJSON as LeafletGeoJSON } from 'leaflet';
-import { ContainerProvider } from '../../contexts/containter';
-import useLayer from '../../hooks/useLayer';
+import { GeoJSON as LeafletGeoJSON, PathOptions } from 'leaflet';
+import { ContainerProvider } from '../../../contexts/containter';
+import useLayer from '../../../hooks/useLayer';
+import { useQuicklyEvents } from '../../../hooks/useEvents';
+import useEvents from './useEvents';
 import { GeoJsonGroupProps } from './types';
 
-const GeoJsonGroup = forwardRef<{ layer?: LeafletGeoJSON }, GeoJsonGroupProps>(
-  ({ children, geojson, fit, onMounted, ...options }, ref) => {
+const GeoJsonGroup = forwardRef<LeafletGeoJSON | undefined, GeoJsonGroupProps<PathOptions>>(
+  ({ children, geojson, fit, onMounted, style, ...props }, ref) => {
+    const { options, events } = useEvents(props);
+
     const createLayer = useCallback(() => {
       return new LeafletGeoJSON(geojson, options);
     }, [geojson, options]);
@@ -21,13 +25,14 @@ const GeoJsonGroup = forwardRef<{ layer?: LeafletGeoJSON }, GeoJsonGroupProps>(
       }
     }, [layer]);
 
+    useQuicklyEvents(layer, events);
+
     useEffect(() => {
       if (map && layer && fit) {
         map?.fitBounds(layer.getBounds());
       }
     }, [map, layer, fit]);
 
-    const { style } = options;
     useEffect(() => {
       if (layer) {
         if (!style) layer.resetStyle();

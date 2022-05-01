@@ -1,4 +1,4 @@
-import React, { useRef, useMemo, Fragment } from 'react';
+import React, { useMemo, Fragment } from 'react';
 import { Leaflet, Map, TileLayer, Polyline, latLng } from 'react-leaflet2';
 import { GreatCircle } from 'arc';
 import styles from './index.less';
@@ -12,7 +12,6 @@ const MB_URL =
   'https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token=' + ACCESS_TOKEN;
 
 export default () => {
-  const polylineRef = useRef<Leaflet.Polyline>(null);
   const latlngs = useMemo(() => {
     const generator = new GreatCircle(
       {
@@ -47,7 +46,6 @@ export default () => {
               polyline._path.style.strokeDashoffset = 0;
             }, 5000);
           }}
-          ref={polylineRef}
         />
       </Map>
     </Fragment>

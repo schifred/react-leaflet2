@@ -6,8 +6,8 @@ import { useQuicklyEvents } from '../../../hooks/useEvents';
 import useEvents from './useEvents';
 import type { ImageOverlayProps } from './types';
 
-const ImageOverlay = forwardRef<{ layer?: LeafletImageOverlay }, ImageOverlayProps>(
-  ({ children, url, bounds, fit, ...props }, ref) => {
+const ImageOverlay = forwardRef<LeafletImageOverlay | undefined, ImageOverlayProps>(
+  ({ children, url, bounds, fit, onMounted, ...props }, ref) => {
     const { container } = useContainerContext();
     const { options, events } = useEvents(props);
     const createLayer = useCallback(() => {
@@ -18,6 +18,12 @@ const ImageOverlay = forwardRef<{ layer?: LeafletImageOverlay }, ImageOverlayPro
       createLayer,
       ref,
     });
+
+    useEffect(() => {
+      if (layer && onMounted) {
+        onMounted(layer);
+      }
+    }, [layer]);
 
     useQuicklyEvents(layer, events);
 

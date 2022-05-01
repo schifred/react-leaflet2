@@ -1,5 +1,6 @@
 import React from 'react';
 import Leaflet, { LatLng } from 'leaflet';
+import DivOverlayLayer from './DivOverlayLayer';
 import { Events, Methods } from './useEvents/events';
 
 export type DivOverlayProps = {
@@ -7,4 +8,5 @@ export type DivOverlayProps = {
   latlng: LatLng;
   className?: string;
   fit?: boolean;
+  onMounted?: (divOverlayLayer: typeof DivOverlayLayer) => void;
 } & Methods;

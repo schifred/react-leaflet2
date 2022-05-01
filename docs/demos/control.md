@@ -23,10 +23,16 @@ react-leaflet2 内置了以下控件：
 
 <code src="./control/layers" />
 
-### 自定义 1
+### 路径规划（自定义控件方式 1）
 
-<code src="./control/custom" />
+<code src="./control/routingMachine" />
 
-### 自定义 2
+### 缩略图（自定义控件方式 1）
+
+<code src="./control/minimap" />
+
+### 图例（自定义控件方式 2）
+
+这是一个使用 ControlProvider 制作图例的示例。
 
 <code src="./control/provider" />

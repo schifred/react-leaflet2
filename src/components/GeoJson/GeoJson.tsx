@@ -5,7 +5,7 @@ import Wicket from 'wicket';
 import WKT from '../WKT/WKT';
 import { GeoJsonProps } from './types';
 
-const GeoJsonGroup = forwardRef<{ layer?: Path }, GeoJsonProps>(
+const GeoJson = forwardRef<Path | undefined, GeoJsonProps>(
   ({ children, geojson, fit, ...props }, ref) => {
     const wkt = useMemo(() => {
       const wicket = new Wicket.Wkt();
@@ -14,11 +14,11 @@ const GeoJsonGroup = forwardRef<{ layer?: Path }, GeoJsonProps>(
 
     return (
       // @ts-ignore
-      <WKT {...props} wkt={wkt}>
+      <WKT {...props} wkt={wkt} ref={ref}>
         {children}
       </WKT>
     );
   },
 );
 
-export default GeoJsonGroup;
+export default GeoJson;

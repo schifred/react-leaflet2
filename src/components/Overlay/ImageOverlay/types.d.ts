@@ -1,5 +1,5 @@
 import React from 'react';
-import Leaflet, { ImageOverlayOptions, LatLngBoundsExpression } from 'leaflet';
+import Leaflet, { ImageOverlay, ImageOverlayOptions, LatLngBoundsExpression } from 'leaflet';
 import { Events, Methods } from './useEvents/events';
 
 export type ImageOverlayProps = {
@@ -7,5 +7,6 @@ export type ImageOverlayProps = {
   url: string;
   bounds: LatLngBoundsExpression;
   fit?: boolean;
+  onMounted?: (imageOverlay: ImageOverlay) => void;
 } & ImageOverlayOptions &
   Methods;

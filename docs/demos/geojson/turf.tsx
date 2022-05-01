@@ -1,5 +1,5 @@
-import React, { useMemo, Fragment } from 'react';
-import { Leaflet, Map, TileLayer, latLng, GeoJson, Marker } from 'react-leaflet2';
+import React, { Fragment } from 'react';
+import { Map, TileLayer, latLng, GeoJson } from 'react-leaflet2';
 import { concave } from '@turf/turf';
 import geojson from './geojsons/sf_locations.json';
 

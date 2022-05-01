@@ -10,8 +10,6 @@ const MB_ATTR =
 const MB_URL =
   'https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token=' + ACCESS_TOKEN;
 
-const position = latLng(30.271486, 120.160136);
-
 // https://github.com/pointhi/leaflet-color-markers
 const icon = new Marker.Icon({
   iconUrl: 'https://unpkg.com/leaflet@1.8.0/dist/images/marker-icon-2x.png',

@@ -6,7 +6,7 @@ import { useQuicklyEvents } from '../../../hooks/useEvents';
 import useEvents from './useEvents';
 import { CircleProps } from './types';
 
-const CircleMarker = forwardRef<{ layer?: LeafletCircleMarker }, CircleProps>(
+const CircleMarker = forwardRef<LeafletCircleMarker | undefined, CircleProps>(
   ({ children, latlng, fit, onMounted, ...props }, ref) => {
     const { container } = useContainerContext();
     const { options, events } = useEvents(props);

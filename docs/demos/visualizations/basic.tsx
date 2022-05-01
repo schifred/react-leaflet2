@@ -1,5 +1,5 @@
-import React, { useMemo, Fragment } from 'react';
-import { Leaflet, Map, TileLayer, latLng, GeoJson, Marker } from 'react-leaflet2';
+import React, { Fragment } from 'react';
+import { Map, TileLayer, latLng, GeoJson } from 'react-leaflet2';
 import geojson from './geojsons/us.json';
 import data from './geojsons/censusdata.json';
 

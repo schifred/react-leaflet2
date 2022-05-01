@@ -1,5 +1,5 @@
 import React, { useState, Fragment } from 'react';
-import { Map, TileLayer, latLng, Marker, Popup, LatLng, Tooltip } from 'react-leaflet2';
+import { Map, TileLayer, latLng, Marker, LatLng, Tooltip } from 'react-leaflet2';
 import 'leaflet/dist/leaflet.css';
 
 const ACCESS_TOKEN =

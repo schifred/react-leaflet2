@@ -1,6 +1,6 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { DivIcon, Point } from 'leaflet';
-import { Draw, WKT, latLng } from 'react-leaflet2';
+import { Draw, latLng } from 'react-leaflet2';
 import 'leaflet/dist/leaflet.css';
 
 const ACCESS_TOKEN =

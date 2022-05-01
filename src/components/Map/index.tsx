@@ -1,17 +1,31 @@
-import React, { useState, useEffect, useRef, useImperativeHandle, forwardRef } from 'react';
+import React, {
+  useState,
+  useEffect,
+  useMemo,
+  useRef,
+  useImperativeHandle,
+  forwardRef,
+} from 'react';
 import '../../index.less';
 import Leaflet, { Map as LeafletMap } from 'leaflet';
+import classNames from 'classnames';
 import { MapProvider } from '../../contexts/map';
 import { ContainerProvider } from '../../contexts/containter';
 import { useQuicklyEvents } from '../../hooks/useEvents';
 import useEvents from './useEvents';
 import type { MapProps } from './types';
 
-const Map = forwardRef<{ map?: LeafletMap }, MapProps>(
-  ({ style, children, bounds, ...props }, ref) => {
+const Map = forwardRef<LeafletMap | undefined, MapProps>(
+  ({ className, style, children, bounds, onMounted, ...props }, ref) => {
     const [map, setMap] = useState<LeafletMap | undefined>();
     const containerRef = useRef<HTMLDivElement>(null);
     const { options, events } = useEvents(map, props);
+
+    useEffect(() => {
+      if (map && onMounted) {
+        onMounted(map);
+      }
+    }, [map]);
 
     useEffect(() => {
       if (containerRef.current && !map) {
@@ -33,9 +47,7 @@ const Map = forwardRef<{ map?: LeafletMap }, MapProps>(
     useImperativeHandle(
       ref,
       () => {
-        return {
-          map,
-        };
+        return map;
       },
       [map],
     );
@@ -55,8 +67,15 @@ const Map = forwardRef<{ map?: LeafletMap }, MapProps>(
       }
     }, [bounds]);
 
+    const containerClassName = useMemo(() => {
+      return classNames({
+        'react-leaflet2': true,
+        [className || '']: !!className,
+      });
+    }, [className]);
+
     return (
-      <div className="react-leaflet2" ref={containerRef} style={style}>
+      <div className={containerClassName} ref={containerRef} style={style}>
         {map ? (
           <MapProvider value={{ map }}>
             <ContainerProvider value={{ container: map }}>{children}</ContainerProvider>

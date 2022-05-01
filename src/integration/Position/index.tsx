@@ -12,7 +12,7 @@ const icon = new Marker.Icon({
   shadowSize: [41, 41],
 });
 
-const Position = forwardRef<{ map?: LeafletMap }, PositionProps>(
+const Position = forwardRef<LeafletMap | undefined, PositionProps>(
   ({ children, icon: iconProp, latlng: latlngProp, onChange, ...props }, ref) => {
     const [latlng, setLatlng] = useState<LatLng>();
 
@@ -26,12 +26,13 @@ const Position = forwardRef<{ map?: LeafletMap }, PositionProps>(
 
     useEffect(() => {
       // @ts-ignore
-      if (ref?.current?.map) ref?.current?.map?.setView(latlngProp);
+      if (ref?.current) ref?.current?.setView(latlngProp);
     }, [ref, latlngProp]);
 
     return (
       <EnhancedMap {...props} onClick={handleClick} ref={ref}>
         {latlng && (
+          // @ts-ignore
           <Marker latlng={latlng} icon={iconProp || icon}>
             {children}
           </Marker>

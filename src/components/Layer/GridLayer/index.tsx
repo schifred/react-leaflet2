@@ -1,13 +1,13 @@
 import React, { forwardRef, useCallback, useEffect } from 'react';
-import { GridLayer as LeafletGridLayer, GridLayerOptions } from 'leaflet';
+import { GridLayer as LeafletGridLayer } from 'leaflet';
 import { ContainerProvider, useContainerContext } from '../../../contexts/containter';
 import useLayer from '../../../hooks/useLayer';
 import { useQuicklyEvents } from '../../../hooks/useEvents';
 import useEvents from './useEvents';
 import { GridLayerProps } from './types';
 
-const GridLayer = forwardRef<{ layer?: LeafletGridLayer }, GridLayerProps>(
-  ({ children, ...props }, ref) => {
+const GridLayer = forwardRef<LeafletGridLayer | undefined, GridLayerProps>(
+  ({ children, onMounted, ...props }, ref) => {
     const { container } = useContainerContext();
     const { options, events } = useEvents(props);
 
@@ -19,6 +19,12 @@ const GridLayer = forwardRef<{ layer?: LeafletGridLayer }, GridLayerProps>(
       createLayer,
       ref,
     });
+
+    useEffect(() => {
+      if (layer && onMounted) {
+        onMounted(layer);
+      }
+    }, [layer]);
 
     useQuicklyEvents(layer, events);
 

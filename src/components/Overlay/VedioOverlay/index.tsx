@@ -1,13 +1,13 @@
 import React, { forwardRef, useEffect, useCallback } from 'react';
-import { VideoOverlay as LeafletVideoOverlay, latLngBounds } from 'leaflet';
+import { VideoOverlay as LeafletVideoOverlay } from 'leaflet';
 import { ContainerProvider, useContainerContext } from '../../../contexts/containter';
 import useLayer from '../../../hooks/useLayer';
 import { useQuicklyEvents } from '../../../hooks/useEvents';
 import useEvents from './useEvents';
 import type { VideoOverlayProps } from './types';
 
-const VideoOverlay = forwardRef<{ layer?: LeafletVideoOverlay }, VideoOverlayProps>(
-  ({ children, url, bounds, fit, ...props }, ref) => {
+const VideoOverlay = forwardRef<LeafletVideoOverlay | undefined, VideoOverlayProps>(
+  ({ children, url, bounds, fit, onMounted, ...props }, ref) => {
     const { container } = useContainerContext();
     const { options, events } = useEvents(props);
     const createLayer = useCallback(() => {
@@ -18,6 +18,12 @@ const VideoOverlay = forwardRef<{ layer?: LeafletVideoOverlay }, VideoOverlayPro
       createLayer,
       ref,
     });
+
+    useEffect(() => {
+      if (layer && onMounted) {
+        onMounted(layer);
+      }
+    }, [layer]);
 
     useQuicklyEvents(layer, events);
 

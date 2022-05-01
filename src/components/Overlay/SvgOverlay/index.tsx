@@ -1,14 +1,13 @@
-import React, { forwardRef, useEffect, useCallback, useState } from 'react';
+import { forwardRef, useEffect, useCallback, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { SVGOverlay as LeafletSVGOverlay, latLngBounds } from 'leaflet';
-import { ContainerProvider, useContainerContext } from '../../../contexts/containter';
 import useLayer from '../../../hooks/useLayer';
 import { useQuicklyEvents } from '../../../hooks/useEvents';
 import useEvents from './useEvents';
 import type { SvgOverlayProps } from './types';
 
-const SvgOverlay = forwardRef<{ layer?: LeafletSVGOverlay }, SvgOverlayProps>(
-  ({ children, bounds, fit, ...props }, ref) => {
+const SvgOverlay = forwardRef<LeafletSVGOverlay | undefined, SvgOverlayProps>(
+  ({ children, bounds, fit, onMounted, ...props }, ref) => {
     const [svgContainer, setSvgContainer] = useState<SVGElement>();
     const { options, events } = useEvents(props);
     const createLayer = useCallback(() => {
@@ -22,6 +21,12 @@ const SvgOverlay = forwardRef<{ layer?: LeafletSVGOverlay }, SvgOverlayProps>(
       createLayer,
       ref,
     });
+
+    useEffect(() => {
+      if (layer && onMounted) {
+        onMounted(layer);
+      }
+    }, [layer]);
 
     useQuicklyEvents(layer, events);
 

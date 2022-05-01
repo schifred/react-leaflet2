@@ -6,7 +6,7 @@ import { useQuicklyEvents } from '../../../hooks/useEvents';
 import useEvents from './useEvents';
 import { RectangleProps } from './types';
 
-const Rectangle = forwardRef<{ layer?: LeafletRectangle }, RectangleProps>(
+const Rectangle = forwardRef<LeafletRectangle | undefined, RectangleProps>(
   ({ children, latlngs, fit, onMounted, ...props }, ref) => {
     const { container } = useContainerContext();
     const { options, events } = useEvents(props);

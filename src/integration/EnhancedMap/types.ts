@@ -1,11 +1,11 @@
 import { MapProps } from '../../components/Map/types';
 import { TileLayerProps } from '../../components/Layer/TileLayer/types';
 import { ControlLayerProp } from '../../components/Control/ControlLayers/types';
-import { Record } from '../../components/Control/ControlSearch/types';
+import { Option } from '../../components/Control/ControlSearch/types';
 
 export type EnhancedMapProps = {
   controls?: string[];
-  onSearch?: (text: string) => Promise<Record[]>;
+  onSearch?: (text: string) => Promise<Option[]>;
   layers?: Layer[];
   tileLayers?: Omit<TileLayerProps, 'children'>[];
 } & Omit<MapProps, 'layers'>;

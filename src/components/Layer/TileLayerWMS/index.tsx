@@ -6,8 +6,8 @@ import { useQuicklyEvents } from '../../../hooks/useEvents';
 import useEvents from './useEvents';
 import { TileLayerWMSProps } from './types';
 
-const TileLayerWMS = forwardRef<{ layer?: LeafletTileLayer.WMS }, TileLayerWMSProps>(
-  ({ children, url, params, ...props }, ref) => {
+const TileLayerWMS = forwardRef<LeafletTileLayer.WMS | undefined, TileLayerWMSProps>(
+  ({ children, url, params, onMounted, ...props }, ref) => {
     const { container } = useContainerContext();
     const { options, events } = useEvents(props);
 
@@ -19,6 +19,12 @@ const TileLayerWMS = forwardRef<{ layer?: LeafletTileLayer.WMS }, TileLayerWMSPr
       createLayer,
       ref,
     });
+
+    useEffect(() => {
+      if (layer && onMounted) {
+        onMounted(layer);
+      }
+    }, [layer]);
 
     useQuicklyEvents(layer, events);
 
