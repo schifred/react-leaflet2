@@ -6,13 +6,27 @@ import { useQuicklyEvents } from '../../../hooks/useEvents';
 import useEvents from './useEvents';
 import type { MarkerProps } from './types';
 
+// 默认高德样式 icon
+const DefaultIcon = new Icon({
+  iconUrl: '//webapi.amap.com/theme/v1.3/markers/b/mark_bs.png',
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41],
+});
+
 const _Marker = forwardRef<LeafletMarker | undefined, MarkerProps>(
   ({ latlng, children, marker, ...props }, ref) => {
     const { container } = useContainerContext();
     const { options, events } = useEvents(props);
 
     const createLayer = useCallback(() => {
-      return marker ? marker : new LeafletMarker(latlng, options);
+      // 重写 icon
+      if (marker?.getIcon().options.iconUrl === 'marker-icon.png') {
+        marker.setIcon(DefaultIcon);
+      }
+
+      return marker ? marker : new LeafletMarker(latlng, { icon: DefaultIcon, ...options });
     }, [latlng, options, marker]);
 
     const { map, layer } = useLayer({

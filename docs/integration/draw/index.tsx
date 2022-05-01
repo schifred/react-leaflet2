@@ -17,19 +17,7 @@ const wkt =
   'POLYGON((120.1161003112793 30.30691909894813,120.12451171875 30.30709076032508,120.11833190917969 30.301082612131722,120.1161003112793 30.30691909894813))';
 
 const draw = {
-  polygon: {
-    allowIntersection: false,
-    showArea: true,
-    metric: ['km', 'm'],
-    precision: {
-      m: 2,
-      km: 8,
-    },
-    touchIcon: new DivIcon({
-      iconSize: new Point(10, 10),
-      className: 'leaflet-div-icon leaflet-editing-icon leaflet-touch-icon',
-    }),
-  },
+  polygon: true,
   polyline: false,
   circle: false,
   rectangle: false,

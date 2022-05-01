@@ -1,5 +1,6 @@
 ---
-title: Control
+title: 控件
+order: 4
 ---
 
 react-leaflet2 内置了以下控件：

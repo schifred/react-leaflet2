@@ -1,5 +1,3 @@
-import Leaflet from 'leaflet';
-export { Leaflet };
 export { GridLayer, CRS, Renderer, LatLng, LatLngBounds, Point, Bounds } from 'leaflet';
 
 // @ts-ignore
@@ -10,6 +8,7 @@ export * from './integration';
 export { useMapContext } from './contexts/map';
 export { latLng, latLngBounds } from './utils/latlng';
 export { convertWkt2GeoObject } from './utils/converts';
+export { Leaflet } from './utils/leaflet';
 export {
   getCenter,
   getArea,

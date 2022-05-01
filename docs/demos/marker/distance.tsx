@@ -10,15 +10,6 @@ const MB_ATTR =
 const MB_URL =
   'https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token=' + ACCESS_TOKEN;
 
-// https://github.com/pointhi/leaflet-color-markers
-const icon = new Marker.Icon({
-  iconUrl: 'https://unpkg.com/leaflet@1.8.0/dist/images/marker-icon-2x.png',
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-  shadowSize: [41, 41],
-});
-
 const fixedPosition = latLng(38.9131775, -77.032544);
 
 export default () => {
@@ -37,12 +28,12 @@ export default () => {
         >
           <TileLayer url={MB_URL} attribution={MB_ATTR} id="light-v9" />
 
-          <Marker latlng={fixedPosition} icon={icon} />
+          <Marker latlng={fixedPosition} />
 
           {latlng && (
             <Fragment>
               <Polyline latlngs={[fixedPosition, latlng]} color="#000" opacity={0.5} weight={4} />
-              <Marker latlng={latlng} icon={icon} />
+              <Marker latlng={latlng} />
             </Fragment>
           )}
         </Map>

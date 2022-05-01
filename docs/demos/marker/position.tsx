@@ -12,15 +12,6 @@ const MB_URL =
 
 const position = latLng(30.271486, 120.160136);
 
-// https://github.com/pointhi/leaflet-color-markers
-const icon = new Marker.Icon({
-  iconUrl: 'https://unpkg.com/leaflet@1.8.0/dist/images/marker-icon-2x.png',
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-  shadowSize: [41, 41],
-});
-
 export default () => {
   const [latlng, setLatlng] = useState<LatLng>();
 
@@ -39,7 +30,6 @@ export default () => {
         {latlng && (
           <Marker
             latlng={latlng}
-            icon={icon}
             onAdd={() => {
               console.log(111);
             }}

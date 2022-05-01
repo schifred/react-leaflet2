@@ -19,7 +19,7 @@ export default () => {
     geojsonGroupLayer.eachLayer(function (layer) {
       result.push(layer);
     });
-    return result;
+    return result as Leaflet.Marker[];
   }, []);
 
   return (
@@ -28,8 +28,8 @@ export default () => {
         <TileLayer url={MB_URL} attribution={MB_ATTR} id="light-v9" />
 
         <MarkerCluster>
-          {markers.map((marker) => {
-            return <Marker marker={marker} />;
+          {markers.map((marker: Leaflet.Marker) => {
+            return <Marker key={marker.getLatLng().toString()} marker={marker} />;
           })}
         </MarkerCluster>
       </Map>
