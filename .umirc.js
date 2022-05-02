@@ -3,7 +3,6 @@ import path from 'path';
 export default {
   history: { type: 'hash' },
   base: '/',
-  publicPath: '/',
   mode: 'site',
   logo: 'https://smebimage.fuliaoyi.com/Fger7VZclDUaXDJuqg42MlsUqV-w',
   favicon: 'https://smebimage.fuliaoyi.com/Fger7VZclDUaXDJuqg42MlsUqV-w',
