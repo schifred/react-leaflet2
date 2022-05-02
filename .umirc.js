@@ -4,11 +4,10 @@ export default {
   history: { type: 'hash' },
   base: '/',
   publicPath: '/',
-  outputPath: 'site',
   mode: 'site',
   logo: 'https://smebimage.fuliaoyi.com/Fger7VZclDUaXDJuqg42MlsUqV-w',
   favicon: 'https://smebimage.fuliaoyi.com/Fger7VZclDUaXDJuqg42MlsUqV-w',
-  outputPath: 'site',
+  outputPath: 'docs',
   navs: [
     null,
     {
@@ -17,7 +16,7 @@ export default {
     },
   ],
   resolve: {
-    includes: ['docs'],
+    includes: ['mds'],
   },
   alias: {
     'react-leaflet2': path.resolve(__dirname, 'src'),
