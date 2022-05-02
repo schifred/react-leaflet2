@@ -10,8 +10,6 @@ const MB_ATTR =
 const MB_URL =
   'https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token=' + ACCESS_TOKEN;
 
-const position = latLng(32.7872, -86.6381);
-
 const state = statesData.features[0];
 state.geometry.coordinates = [
   // the world
@@ -29,7 +27,7 @@ state.geometry.coordinates = [
 export default () => {
   return (
     <Fragment>
-      <Map center={position} zoom={6} style={{ width: '100%', height: 400 }}>
+      <Map center={latLng(32.7872, -86.6381)} zoom={6} style={{ width: '100%', height: 400 }}>
         <TileLayer url={MB_URL} attribution={MB_ATTR} id="light-v9" />
 
         <GeoJson.GeoJsonGroup geojson={state} fillOpacity={1} fillColor="#fff" weight={0} />

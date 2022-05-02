@@ -20,3 +20,9 @@ order: 2
 本例结合使用 [leaflet.heat](https://github.com/Leaflet/Leaflet.heat)。
 
 <code src="./visualizations/heat" />
+
+### 洋流
+
+本例结合使用 [leaflet-velocity](https://github.com/onaci/leaflet-velocity)。
+
+<code src="./visualizations/velocity" />

@@ -11,11 +11,10 @@ const MB_ATTR =
 const MB_URL =
   'https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token=' + ACCESS_TOKEN;
 
-const position = latLng(-37.87, 175.475);
 export default () => {
   return (
     <Fragment>
-      <Map center={position} zoom={12} style={{ width: '100%', height: 400 }}>
+      <Map center={latLng(-37.87, 175.475)} zoom={12} style={{ width: '100%', height: 400 }}>
         <TileLayer url={MB_URL} attribution={MB_ATTR} id="light-v9" />
 
         <Layer

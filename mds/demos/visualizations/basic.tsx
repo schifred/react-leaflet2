@@ -11,8 +11,6 @@ const MB_ATTR =
 const MB_URL =
   'https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token=' + ACCESS_TOKEN;
 
-const position = latLng(40, -96);
-
 const Colors = ['#eff3ff', '#bdd7e7', '#6baed6', '#3182bd', '#08519c'];
 const variable = 'B06011002 - Born in state of residence';
 let max: undefined | number = undefined;
@@ -26,13 +24,13 @@ data.forEach((item) => {
 export default () => {
   return (
     <Fragment>
-      <Map center={position} zoom={4} style={{ width: '100%', height: 400 }}>
+      <Map center={latLng(40, -96)} zoom={4} style={{ width: '100%', height: 400 }}>
         <TileLayer url={MB_URL} attribution={MB_ATTR} id="light-v9" />
 
         <GeoJson.GeoJsonGroup
           geojson={geojson}
           onMounted={(geojsonLayer) => {
-            geojsonLayer.eachLayer(function (layer) {
+            geojsonLayer.eachLayer((layer) => {
               const { name } = layer.feature.properties;
               const found = data.find((it) => it.name === name)!;
               const division = Math.floor(
