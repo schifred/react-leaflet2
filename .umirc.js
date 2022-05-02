@@ -24,6 +24,9 @@ export default {
   },
   styles: [
     `
+    .__dumi-default-menu-inner ul li a span {
+      font-size: 16px
+    }
     `,
   ],
 };

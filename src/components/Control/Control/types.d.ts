@@ -1,6 +1,21 @@
 import React from 'react';
-import { Control, LatLngTuple } from 'leaflet';
+import { Control } from 'leaflet';
 
 export type ControlProps = {
-  createControl: ({ position }: Pick<Control.ScaleOptions, 'position'>) => Control;
-} & Pick<Control.ScaleOptions, 'position'>;
+  /**
+   * 创建控件实例
+   * @description       创建控件实例
+   * @default           undefined
+   */
+  createControl: ({
+    position,
+  }: {
+    position: 'topleft' | 'topright' | 'bottomleft' | 'bottomright';
+  }) => Control;
+  /**
+   * 位置
+   * @description       位置
+   * @default           undefined
+   */
+  position?: 'topleft' | 'topright' | 'bottomleft' | 'bottomright';
+};

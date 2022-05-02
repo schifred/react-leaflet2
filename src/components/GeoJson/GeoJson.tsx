@@ -2,7 +2,7 @@ import React, { forwardRef, useMemo } from 'react';
 import { Path } from 'leaflet';
 // @ts-ignore
 import Wicket from 'wicket';
-import WKT from '../WKT/WKT';
+import WKT from '../WKT';
 import { GeoJsonProps } from './types';
 
 const GeoJson = forwardRef<Path | undefined, GeoJsonProps>(

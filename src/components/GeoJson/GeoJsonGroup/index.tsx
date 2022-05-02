@@ -1,8 +1,9 @@
 import React, { forwardRef, useCallback, useEffect } from 'react';
-import { GeoJSON as LeafletGeoJSON, PathOptions } from 'leaflet';
+import { Marker, GeoJSON as LeafletGeoJSON, PathOptions } from 'leaflet';
 import { ContainerProvider } from '../../../contexts/containter';
 import useLayer from '../../../hooks/useLayer';
 import { useQuicklyEvents } from '../../../hooks/useEvents';
+import { DefaultIcon } from '../../_common/icon';
 import useEvents from './useEvents';
 import { GeoJsonGroupProps } from './types';
 
@@ -11,7 +12,13 @@ const GeoJsonGroup = forwardRef<LeafletGeoJSON | undefined, GeoJsonGroupProps<Pa
     const { options, events } = useEvents(props);
 
     const createLayer = useCallback(() => {
-      return new LeafletGeoJSON(geojson, options);
+      return new LeafletGeoJSON(geojson, {
+        pointToLayer: (geojson, latlng) =>
+          new Marker(latlng, {
+            icon: DefaultIcon,
+          }),
+        ...options,
+      });
     }, [geojson, options]);
 
     const { map, layer } = useLayer({

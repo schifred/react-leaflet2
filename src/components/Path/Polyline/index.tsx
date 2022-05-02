@@ -12,6 +12,7 @@ const Polyline = forwardRef<LeafletPolyline | undefined, PolylineProps>(
     const { options, events } = useEvents(props);
 
     const createLayer = useCallback(() => {
+      console.log(new LeafletPolyline(latlngs, options));
       return new LeafletPolyline(latlngs, options);
     }, [latlngs, options]);
 

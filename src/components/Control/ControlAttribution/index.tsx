@@ -1,29 +1,15 @@
-import { forwardRef, useCallback, useEffect } from 'react';
+import React, { forwardRef } from 'react';
 import { Control as LeafletControl } from 'leaflet';
-import useControl from '../../../hooks/useControl';
-import { ControlAttributionProps } from './types';
+import Control from '../Control';
+import { ControlProps } from '../Control/types';
 
 const ControlAttribution = forwardRef<
-  { control?: LeafletControl.Attribution },
-  ControlAttributionProps
->(({ ...options }, ref) => {
-  const createControl = useCallback(() => {
-    return new LeafletControl.Attribution(options);
-  }, [options]);
-
-  const { map, control } = useControl({
-    createControl,
-    ref,
-  });
-
-  const { position } = options;
-  useEffect(() => {
-    if (control && position) {
-      control.setPosition(position);
-    }
-  }, [position]);
-
-  return null;
+  LeafletControl.Attribution | undefined,
+  Omit<ControlProps, 'createControl'>
+>((props, ref) => {
+  return (
+    <Control {...props} createControl={() => new LeafletControl.Attribution(props)} ref={ref} />
+  );
 });
 
 export default ControlAttribution;

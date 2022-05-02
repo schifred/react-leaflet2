@@ -12,13 +12,22 @@ export type WKTProps = (
   | Omit<RectangleProps, 'latlngs' | 'onMounted'>
   | Omit<CircleProps, 'latlng' | 'onMounted'>
 ) & {
+  /**
+   * wkt 数据
+   * @description       wkt 数据
+   * @default           undefined
+   */
   wkt: string;
+  /**
+   * 挂载事件
+   * @description       挂载事件
+   * @default           undefined
+   */
   onMounted?: (wkt: Wicket.Wkt) => void;
+  /**
+   * 子节点
+   * @description       子节点
+   * @default           undefined
+   */
   children?: React.ReactNode;
 };
-
-export type WKTGroupProps = {
-  children?: React.ReactNode;
-  wkt: string;
-  fit?: boolean;
-} & GeoJSONOptions;

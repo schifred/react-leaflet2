@@ -1,5 +1,5 @@
 import React, { forwardRef, useCallback, useEffect, useState, useRef } from 'react';
-import { Control as LeafletControl, FeatureGroup, Map as LeafletMap } from 'leaflet';
+import { FeatureGroup, Map as LeafletMap } from 'leaflet';
 import { WKT, DrawPlayground, Marker } from '../../components';
 import { getCenter, getArea, getWkt, checkFeatureGroupContain } from '../../utils/map';
 import EnhancedMap from '../EnhancedMap';
@@ -24,15 +24,12 @@ const Draw = forwardRef<LeafletMap | undefined, DrawProps>(
   ) => {
     const [value, setValue] = useState<Value>({});
     const [points, setPoints] = useState<Points>([]);
-    const drawPlaygroundRef = useRef<{
-      control?: LeafletControl.Draw;
-      featureGroup: FeatureGroup;
-    }>(null);
+    const drawPlaygroundRef = useRef<FeatureGroup | undefined>(null);
 
     useEffect(() => {
-      if (drawPlaygroundRef.current?.featureGroup && pointsProp) {
+      if (drawPlaygroundRef.current && pointsProp) {
         const pts = pointsProp.filter((point) =>
-          checkFeatureGroupContain(drawPlaygroundRef.current?.featureGroup!, point?.latlng),
+          checkFeatureGroupContain(drawPlaygroundRef.current!, point?.latlng),
         );
         setPoints(pts);
         setValue((value) => ({

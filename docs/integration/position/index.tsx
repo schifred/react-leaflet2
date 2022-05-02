@@ -10,13 +10,11 @@ const MB_ATTR =
 const MB_URL =
   'https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token=' + ACCESS_TOKEN;
 
-const position = latLng(30.271486, 120.160136);
-
 export default () => {
   return (
     <Fragment>
       <Position
-        center={position}
+        center={latLng(30.271486, 120.160136)}
         zoom={14}
         controls={['zoom', 'scale', 'fullscreen', 'attribution', 'search']}
         style={{ width: '100%', height: 400 }}

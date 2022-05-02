@@ -1,28 +1,13 @@
-import { forwardRef, useCallback, useEffect } from 'react';
+import React, { forwardRef } from 'react';
 import { Control as LeafletControl } from 'leaflet';
-import useControl from '../../../hooks/useControl';
-import { ControlScaleProps } from './types';
+import Control from '../Control';
+import { ControlProps } from '../Control/types';
 
-const ControlScale = forwardRef<{ control?: LeafletControl.Scale }, ControlScaleProps>(
-  ({ ...options }, ref) => {
-    const createControl = useCallback(() => {
-      return new LeafletControl.Scale(options);
-    }, [options]);
-
-    const { map, control } = useControl({
-      createControl,
-      ref,
-    });
-
-    const { position } = options;
-    useEffect(() => {
-      if (control && position) {
-        control.setPosition(position);
-      }
-    }, [position]);
-
-    return null;
-  },
-);
+const ControlScale = forwardRef<
+  LeafletControl.Scale | undefined,
+  Omit<ControlProps, 'createControl'>
+>((props, ref) => {
+  return <Control {...props} createControl={() => new LeafletControl.Scale(props)} ref={ref} />;
+});
 
 export default ControlScale;

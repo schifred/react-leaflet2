@@ -11,6 +11,11 @@ export const Events = {
 };
 
 export type Methods = {
+  /**
+   * 单张瓦片停止加载事件
+   * @description       单张瓦片停止加载事件
+   * @default           undefined
+   */
   onTileAbort?: EventHandler<TileEvent, TileLayer>;
 } & TileEvents.Methods<TileLayer> &
   LayerEvents.Methods<TileLayer> &

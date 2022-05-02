@@ -10,30 +10,28 @@ const WrapControl = LeafletControl.extend({
   },
 });
 
-const ControlProvider = forwardRef<
-  // @ts-ignore
-  { control?: LeafletControl },
-  ControlProviderProps
->(({ position = 'topleft', children }, ref) => {
-  const createControl = useCallback(() => {
-    return new WrapControl({
-      position,
+const ControlProvider = forwardRef<LeafletControl | undefined, ControlProviderProps>(
+  ({ position = 'topleft', children }, ref) => {
+    const createControl = useCallback(() => {
+      return new WrapControl({
+        position,
+      });
+    }, [position]);
+
+    const { map, control } = useControl({
+      createControl,
+      ref,
     });
-  }, [position]);
 
-  const { map, control } = useControl({
-    createControl,
-    ref,
-  });
+    useEffect(() => {
+      if (control && position) {
+        control.setPosition(position);
+      }
+    }, [position]);
 
-  useEffect(() => {
-    if (control && position) {
-      control.setPosition(position);
-    }
-  }, [position]);
-
-  // @ts-ignore
-  return control?._container ? createPortal(children, control?._container) : null;
-});
+    // @ts-ignore
+    return control?._container ? createPortal(children, control?._container) : null;
+  },
+);
 
 export default ControlProvider;

@@ -3,29 +3,27 @@ import { Control as LeafletControl } from 'leaflet';
 import useControl from '../../../hooks/useControl';
 import { ControlProps } from './types';
 
-const Control = forwardRef<
-  // @ts-ignore
-  { control?: LeafletControl },
-  ControlProps
->(({ position = 'topleft', createControl: createControlProp }, ref) => {
-  const createControl = useCallback(() => {
-    return createControlProp({
-      position,
+const Control = forwardRef<LeafletControl | undefined, ControlProps>(
+  ({ position = 'topleft', createControl: createControlProp }, ref) => {
+    const createControl = useCallback(() => {
+      return createControlProp({
+        position,
+      });
+    }, [position]);
+
+    const { map, control } = useControl({
+      createControl,
+      ref,
     });
-  }, [position]);
 
-  const { map, control } = useControl({
-    createControl,
-    ref,
-  });
+    useEffect(() => {
+      if (control && position) {
+        control.setPosition(position);
+      }
+    }, [position]);
 
-  useEffect(() => {
-    if (control && position) {
-      control.setPosition(position);
-    }
-  }, [position]);
-
-  return null;
-});
+    return null;
+  },
+);
 
 export default Control;

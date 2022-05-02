@@ -7,7 +7,7 @@ const useControl = <Control extends LeafletControl>({
   ref,
 }: {
   createControl: () => Control | undefined;
-  ref: React.ForwardedRef<{ control?: Control }>;
+  ref: React.ForwardedRef<Control | undefined>;
 }) => {
   const [control, setControl] = useState<Control>();
   const { map } = useMapContext();
@@ -15,9 +15,7 @@ const useControl = <Control extends LeafletControl>({
   useImperativeHandle(
     ref,
     () => {
-      return {
-        control,
-      };
+      return control;
     },
     [control],
   );

@@ -4,7 +4,7 @@ import useControl from '../../../hooks/useControl';
 import { ControlProvider } from '../../../contexts/controlLayers';
 import { ControlLayersProps } from './types';
 
-const ControlLayers = forwardRef<{ control?: LeafletControl.Layers }, ControlLayersProps>(
+const ControlLayers = forwardRef<LeafletControl.Layers | undefined, ControlLayersProps>(
   ({ children, baseLayers, overlays, ...options }, ref) => {
     const createControl = useCallback(() => {
       return new LeafletControl.Layers(baseLayers, overlays, options);

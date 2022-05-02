@@ -3,17 +3,9 @@ import { Marker as LeafletMarker, Icon, DivIcon } from 'leaflet';
 import { ContainerProvider, useContainerContext } from '../../../contexts/containter';
 import useLayer from '../../../hooks/useLayer';
 import { useQuicklyEvents } from '../../../hooks/useEvents';
+import { DefaultIcon } from '../../_common/icon';
 import useEvents from './useEvents';
 import type { MarkerProps } from './types';
-
-// 默认高德样式 icon
-const DefaultIcon = new Icon({
-  iconUrl: '//webapi.amap.com/theme/v1.3/markers/b/mark_bs.png',
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-  shadowSize: [41, 41],
-});
 
 const _Marker = forwardRef<LeafletMarker | undefined, MarkerProps>(
   ({ latlng, children, marker, ...props }, ref) => {
