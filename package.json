@@ -8,7 +8,7 @@
     "name": "alfred",
     "email": "sc941203@foxmail.com"
   },
-  "repository": "https://github.com/Alfred-sg/react-leaflet2",
+  "repository": "https://github.com/schifred/react-leaflet2",
   "scripts": {
     "start": "dumi dev",
     "build": "father build",
