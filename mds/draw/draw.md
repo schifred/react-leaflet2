@@ -11,7 +11,11 @@ group:
 
 ## Demos
 
-### 多边形
+### 基础
+
+<code src="./basic" />
+
+### 多边形面积
 
 <code src="./polygon" />
 

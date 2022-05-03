@@ -28,6 +28,7 @@ const ControlDraw = forwardRef<LeafletControl.Draw | undefined, ControlDrawProps
         position,
         // @ts-ignore
         draw: options.draw,
+        // @ts-ignore
         edit: {
           ...options.edit,
           featureGroup: container,

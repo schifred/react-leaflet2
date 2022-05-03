@@ -1,6 +1,6 @@
 import EnhancedMap from './EnhancedMap';
 import Position from './Position';
 import Polygons from './Polygons';
-import Draw from './Draw';
+import PolygonDraw from './PolygonDraw';
 
-export { EnhancedMap, Position, Polygons, Draw };
+export { EnhancedMap, Position, Polygons, PolygonDraw };

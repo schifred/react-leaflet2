@@ -1,7 +1,5 @@
-import Leaflet from 'leaflet';
-
 // @ts-ignore
-Leaflet.drawLocal = {
+window.L.drawLocal = {
   draw: {
     toolbar: {
       actions: {
@@ -30,6 +28,7 @@ Leaflet.drawLocal = {
         tooltip: {
           start: '点击拖动绘制圆',
         },
+        radius: '半径',
       },
       circlemarker: {
         tooltip: {

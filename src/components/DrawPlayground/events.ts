@@ -29,8 +29,8 @@ export type Methods = {
    */
   onChange?: EventHandler<LeafletEvent, LeafletFeatureGroup>;
   /**
-   * 矢量图创建事件
-   * @description       矢量图创建事件
+   * 新建完成事件
+   * @description       新建完成事件
    * @default           undefined
    */
   onCreated?: EventHandler<LeafletEvent, LeafletFeatureGroup>;
@@ -41,38 +41,38 @@ export type Methods = {
    */
   onEdited?: EventHandler<LeafletEvent, LeafletFeatureGroup>;
   /**
-   * 拖拽开始事件
-   * @description       拖拽开始事件
+   * 新建功能启用事件
+   * @description       新建功能启用事件
    * @default           undefined
    */
   onDrawStart?: EventHandler<LeafletEvent, LeafletFeatureGroup>;
   /**
-   * 拖拽结束事件
-   * @description       拖拽结束事件
+   * 新建功能终止事件（包含完成或取消、ECS取消）
+   * @description       新建功能终止事件（包含完成或取消、ECS取消）
    * @default           undefined
    */
   onDrawStop?: EventHandler<LeafletEvent, LeafletFeatureGroup>;
   /**
-   * 角点拖拽事件
-   * @description       角点拖拽事件
+   * 新建过程顶点拖拽、添加、移除事件
+   * @description       新建过程顶点拖拽、添加、移除事件
    * @default           undefined
    */
   onDrawVertex?: EventHandler<LeafletEvent, LeafletFeatureGroup>;
   /**
-   * 编辑开始事件
-   * @description       编辑开始事件
+   * 编辑功能启用事件
+   * @description       编辑功能启用事件
    * @default           undefined
    */
   onEditStart?: EventHandler<LeafletEvent, LeafletFeatureGroup>;
   /**
-   * 图形移动事件
-   * @description       图形移动事件
+   * 图形移动事件（比如圆心、矩形中心的移动）
+   * @description       图形移动事件（比如圆心、矩形中心的移动）
    * @default           undefined
    */
   onEditMove?: EventHandler<LeafletEvent, LeafletFeatureGroup>;
   /**
-   * 图形缩放事件
-   * @description       图形缩放事件
+   * 图形缩放事件（比如圆或矩形）
+   * @description       图形缩放事件（比如圆或矩形）
    * @default           undefined
    */
   onEditResize?: EventHandler<LeafletEvent, LeafletFeatureGroup>;
@@ -83,32 +83,32 @@ export type Methods = {
    */
   onEditVertex?: EventHandler<LeafletEvent, LeafletFeatureGroup>;
   /**
-   * 编辑停止事件
-   * @description       编辑停止事件
+   * 编辑功能终止事件（包含保存或取消）
+   * @description       编辑功能终止事件（包含保存或取消）
    * @default           undefined
    */
   onEditStop?: EventHandler<LeafletEvent, LeafletFeatureGroup>;
   /**
-   * 已删除事件
-   * @description       已删除事件
+   * 删除并保存事件
+   * @description       删除并保存事件
    * @default           undefined
    */
   onDeleted?: EventHandler<LeafletEvent, LeafletFeatureGroup>;
   /**
-   * 删除开始事件
-   * @description       删除开始事件
+   * 删除功能启用事件
+   * @description       删除功能启用事件
    * @default           undefined
    */
   onDeleteStart?: EventHandler<LeafletEvent, LeafletFeatureGroup>;
   /**
-   * 删除停止事件
-   * @description       删除停止事件
+   * 删除功能终止事件（包含保存或取消）
+   * @description       删除功能终止事件（包含保存或取消）
    * @default           undefined
    */
   onDeleteStop?: EventHandler<LeafletEvent, LeafletFeatureGroup>;
   /**
-   * marker 点击事件
-   * @description       marker 点击事件
+   * 线段或多边形 marker 右击事件
+   * @description       线段或多边形 marker 右击事件
    * @default           undefined
    */
   onMarkerContext?: EventHandler<LeafletEvent, LeafletFeatureGroup>;
