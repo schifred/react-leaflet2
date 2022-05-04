@@ -10,10 +10,14 @@ import { Events as FeatureGroupEvents } from '../Group/FeatureGroup/useEvents/ev
 import useControl from '../../hooks/useControl';
 import useEvents, { Events } from '../../hooks/useEvents';
 import { useContainerContext } from '../../contexts/containter';
-import './language';
+import DrawLocal from './language';
 import getOptions from './getOptions';
 import { ControlDrawEvent, Methods } from './events';
 import { ControlDrawProps } from './types';
+
+// 规避 tree-shaking
+// @ts-ignore
+window.L.drawLocal = DrawLocal;
 
 const ControlDraw = forwardRef<LeafletControl.Draw | undefined, ControlDrawProps>(
   ({ draw, edit, position = 'topleft', children, ...rest }, ref) => {

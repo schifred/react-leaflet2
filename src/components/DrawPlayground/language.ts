@@ -1,5 +1,4 @@
-// @ts-ignore
-window.L.drawLocal = {
+export default {
   draw: {
     toolbar: {
       actions: {
