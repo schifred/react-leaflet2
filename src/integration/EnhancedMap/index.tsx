@@ -1,4 +1,4 @@
-import React, { forwardRef, Fragment } from 'react';
+import React, { useMemo, forwardRef, Fragment } from 'react';
 import { Map as LeafletMap } from 'leaflet';
 import {
   Map,
@@ -12,9 +12,25 @@ import {
 import { EnhancedMapProps } from './types';
 
 const DefaultControls = ['zoom', 'scale', 'fullscreen', 'attribution', 'search', 'layers'];
+const DefaultControlMap = {
+  scale: ControlScale,
+  fullscreen: ControlFullscreen,
+};
 
 const EnhancedMap = forwardRef<LeafletMap | undefined, EnhancedMapProps>(
-  ({ children, controls = DefaultControls, layers, tileLayers, onSearch, ...props }, ref) => {
+  (
+    { children, controls = DefaultControls, Controls, layers, tileLayers, onSearch, ...props },
+    ref,
+  ) => {
+    const resetControls = controls.filter((it) => !['zoom', 'attribution'].includes(it));
+    // @ts-ignore
+    const ControlsComponentMap = useMemo<Record<string, React.FC>>(() => {
+      return {
+        ...DefaultControlMap,
+        ...Controls,
+      };
+    }, [Controls]);
+
     return (
       <Map
         {...props}
@@ -22,26 +38,47 @@ const EnhancedMap = forwardRef<LeafletMap | undefined, EnhancedMapProps>(
         attributionControl={controls.includes('attribution')}
         ref={ref}
       >
-        {controls.includes('layers') && (
-          <ControlLayers>
-            {layers?.map((layer) => {
-              const { tileLayers, ...rest } = layer;
-              return (
-                <ControlLayers.ControlLayer key={rest.name} {...rest}>
-                  {tileLayers.length === 1 ? (
-                    <TileLayer key={tileLayers[0].url} {...tileLayers[0]} />
-                  ) : (
-                    <FeatureGroup>
-                      {tileLayers.map((tileLayer) => {
-                        return <TileLayer key={tileLayer.url} {...tileLayer} />;
-                      })}
-                    </FeatureGroup>
-                  )}
-                </ControlLayers.ControlLayer>
+        {resetControls.map((it) => {
+          let node;
+          switch (it) {
+            case 'layers':
+              node = (
+                <ControlLayers key={it}>
+                  {layers?.map((layer) => {
+                    const { tileLayers, ...rest } = layer;
+
+                    if (tileLayers.length === 1) {
+                      return (
+                        <ControlLayers.ControlLayer key={rest.name} {...rest}>
+                          <TileLayer key={tileLayers[0].url} {...tileLayers[0]} />
+                        </ControlLayers.ControlLayer>
+                      );
+                    }
+
+                    return (
+                      <ControlLayers.ControlLayer key={rest.name} {...rest}>
+                        <FeatureGroup>
+                          {tileLayers.map((tileLayer) => {
+                            return <TileLayer key={tileLayer.url} {...tileLayer} />;
+                          })}
+                        </FeatureGroup>
+                      </ControlLayers.ControlLayer>
+                    );
+                  })}
+                </ControlLayers>
               );
-            })}
-          </ControlLayers>
-        )}
+              break;
+            case 'search':
+              node = <ControlSearch key={it} onSearch={onSearch} />;
+              break;
+            default:
+              const ControlComponent = ControlsComponentMap[it];
+              node = <ControlComponent key={it} />;
+              break;
+          }
+
+          return node;
+        })}
 
         {!controls.includes('layers') && tileLayers?.length === 1 && (
           <Fragment>
@@ -50,10 +87,6 @@ const EnhancedMap = forwardRef<LeafletMap | undefined, EnhancedMapProps>(
             })}
           </Fragment>
         )}
-
-        {controls.includes('scale') && <ControlScale />}
-        {controls.includes('fullscreen') && <ControlFullscreen />}
-        {controls.includes('search') && <ControlSearch onSearch={onSearch} />}
 
         {children}
       </Map>

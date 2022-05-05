@@ -1,3 +1,4 @@
+import React from 'react';
 import { Control } from 'leaflet';
 import { MapProps } from '../../components/Map/types';
 import { TileLayerProps } from '../../components/Layer/TileLayer/types';
@@ -9,10 +10,16 @@ type ControlType = ('zoom' | 'scale' | 'fullscreen' | 'attribution' | 'search' |
 export type EnhancedMapProps = {
   /**
    * 控制器
-   * @description       搜索事件
+   * @description       控制器
    * @default           undefined
    */
   controls?: ControlType[];
+  /**
+   * 控制器组件
+   * @description       控制器组件
+   * @default           undefined
+   */
+  Controls?: Record<string, React.FC>;
   /**
    * 搜索事件
    * @description       搜索事件

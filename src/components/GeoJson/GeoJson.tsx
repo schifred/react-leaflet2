@@ -11,7 +11,7 @@ const GeoJson = forwardRef<Path | undefined, GeoJsonProps>(
     const wkt = useMemo(() => {
       const wicket = new Wicket.Wkt();
       return wicket.read(geojson).write();
-    }, []);
+    }, [geojson]);
 
     return (
       // @ts-ignore

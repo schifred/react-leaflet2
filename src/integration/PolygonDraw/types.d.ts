@@ -67,18 +67,6 @@ export type PolygonDrawProps = {
   unselectedIcon?: Icon;
   wkt?: string;
   /**
-   * 获取 key
-   * @description       获取 key
-   * @default           undefined
-   */
-  getPloygonKey?: (wkt: WKTProps) => string;
-  /**
-   * 获取 key
-   * @description       获取 key
-   * @default           undefined
-   */
-  getPointKey?: (wkt: WKTProps) => string;
-  /**
    * 变更事件
    * @description       变更事件
    * @default           undefined

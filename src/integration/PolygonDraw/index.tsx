@@ -14,8 +14,6 @@ const PolygonDraw = forwardRef<LeafletMap | undefined, PolygonDrawProps>(
       selectedIcon,
       unselectedIcon,
       wkt,
-      getPloygonKey,
-      getPointKey,
       onChange,
       ...props
     },
@@ -71,17 +69,17 @@ const PolygonDraw = forwardRef<LeafletMap | undefined, PolygonDrawProps>(
     return (
       <EnhancedMap {...props} ref={ref}>
         {ploygons?.map((ploygon) => {
-          return <WKT key={getPloygonKey && getPloygonKey(ploygon)} {...ploygon} />;
+          return <WKT key={ploygon.wkt} {...ploygon} />;
         })}
 
         {points?.map((point) => {
-          const { selected, ...rest } = point;
+          const { selected, latlng, ...rest } = point;
           return (
             <Marker
-              // @ts-ignore
-              key={getPointKey && getPointKey(rest)}
+              key={latlng}
               {...rest}
               icon={selected ? selectedIcon : unselectedIcon}
+              latlng={latlng}
               onClick={handlePointClick}
             />
           );
