@@ -6,6 +6,7 @@ import WKT from '../WKT';
 import { GeoJsonProps } from './types';
 
 const GeoJson = forwardRef<Path | undefined, GeoJsonProps>(
+  // @ts-ignore
   ({ children, geojson, fit, ...props }, ref) => {
     const wkt = useMemo(() => {
       const wicket = new Wicket.Wkt();

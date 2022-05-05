@@ -3,14 +3,12 @@ import { GeoJSONOptions } from 'leaflet';
 import Wicket from 'wicket';
 import { PolylineProps } from '../Path/Polyline/types';
 import { PolygonProps } from '../Path/Polygon/types';
-import { RectangleProps } from '../Path/Rectangle/types';
-import { CircleProps } from '../Path/Circle/types';
+import { MarkerProps } from '../Marker/Marker/types';
 
 export type WKTProps = (
   | Omit<PolylineProps, 'latlngs' | 'onMounted'>
   | Omit<PolygonProps, 'latlngs' | 'onMounted'>
-  | Omit<RectangleProps, 'latlngs' | 'onMounted'>
-  | Omit<CircleProps, 'latlng' | 'onMounted'>
+  | Omit<MarkerProps, 'latlng' | 'onMounted'>
 ) & {
   /**
    * wkt 数据

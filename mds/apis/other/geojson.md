@@ -9,6 +9,8 @@ group:
 
 # GeoJson
 
+只会渲染单个 layer。
+
 ## Demos
 
 ### 基础

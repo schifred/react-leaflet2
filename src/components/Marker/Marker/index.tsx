@@ -18,7 +18,8 @@ const _Marker = forwardRef<LeafletMarker | undefined, MarkerProps>(
         marker.setIcon(DefaultIcon);
       }
 
-      return marker ? marker : new LeafletMarker(latlng, { icon: DefaultIcon, ...options });
+      if (marker) return marker;
+      return latlng ? new LeafletMarker(latlng, { icon: DefaultIcon, ...options }) : undefined;
     }, [latlng, options, marker]);
 
     const { map, layer } = useLayer({

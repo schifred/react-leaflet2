@@ -1,9 +1,10 @@
+import { Control } from 'leaflet';
 import { MapProps } from '../../components/Map/types';
 import { TileLayerProps } from '../../components/Layer/TileLayer/types';
 import { ControlLayerProp } from '../../components/Control/ControlLayers/types';
 import { Option } from '../../components/Control/ControlSearch/types';
 
-type ControlType = 'zoom' | 'scale' | 'fullscreen' | 'attribution' | 'search' | 'layers';
+type ControlType = ('zoom' | 'scale' | 'fullscreen' | 'attribution' | 'search' | 'layers') & string;
 
 export type EnhancedMapProps = {
   /**

@@ -12,7 +12,7 @@ const Rectangle = forwardRef<LeafletRectangle | undefined, RectangleProps>(
     const { options, events } = useEvents(props);
 
     const createLayer = useCallback(() => {
-      return new LeafletRectangle(latlngs, options);
+      return latlngs ? new LeafletRectangle(latlngs, options) : undefined;
     }, [latlngs, options]);
 
     const { map, layer } = useLayer({

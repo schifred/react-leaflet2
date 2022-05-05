@@ -12,7 +12,7 @@ const Polygon = forwardRef<LeafletPolygon | undefined, PolygonProps>(
     const { options, events } = useEvents(props);
 
     const createLayer = useCallback(() => {
-      return new LeafletPolygon(latlngs, options);
+      return latlngs ? new LeafletPolygon(latlngs, options) : undefined;
     }, [latlngs, options]);
 
     const { map, layer } = useLayer({

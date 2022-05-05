@@ -11,18 +11,10 @@ import {
 } from '../../components';
 import { EnhancedMapProps } from './types';
 
+const DefaultControls = ['zoom', 'scale', 'fullscreen', 'attribution', 'search', 'layers'];
+
 const EnhancedMap = forwardRef<LeafletMap | undefined, EnhancedMapProps>(
-  (
-    {
-      children,
-      controls = ['zoom', 'scale', 'fullscreen', 'attribution', 'search', 'layers'],
-      layers,
-      tileLayers,
-      onSearch,
-      ...props
-    },
-    ref,
-  ) => {
+  ({ children, controls = DefaultControls, layers, tileLayers, onSearch, ...props }, ref) => {
     return (
       <Map
         {...props}

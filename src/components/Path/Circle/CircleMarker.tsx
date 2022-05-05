@@ -12,7 +12,7 @@ const CircleMarker = forwardRef<LeafletCircleMarker | undefined, CircleProps>(
     const { options, events } = useEvents(props);
 
     const createLayer = useCallback(() => {
-      return new LeafletCircleMarker(latlng, options);
+      return latlng ? new LeafletCircleMarker(latlng, options) : undefined;
     }, [latlng, options]);
 
     const { map, layer } = useLayer({

@@ -7,7 +7,7 @@ const useLayer = <Layer extends LeafletLayer>({
   createLayer,
   ref,
 }: {
-  createLayer: () => Layer;
+  createLayer: () => Layer | undefined;
   ref: React.ForwardedRef<Layer | undefined>;
 }) => {
   const [layer, setLayer] = useState<Layer>();
@@ -19,8 +19,10 @@ const useLayer = <Layer extends LeafletLayer>({
   useEffect(() => {
     if (container) {
       const layer = createLayer();
-      container?.addLayer(layer);
-      setLayer(layer);
+      if (layer) {
+        container?.addLayer(layer);
+        setLayer(layer);
+      }
     }
   }, [container]);
 
