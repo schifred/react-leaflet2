@@ -5,11 +5,11 @@ import EnhancedMap from '../EnhancedMap';
 import { PolygonsProps } from './types';
 
 const Polygons = forwardRef<LeafletMap | undefined, PolygonsProps>(
-  ({ children, ploygons, getKey, ...props }, ref) => {
+  ({ children, ploygons, ...props }, ref) => {
     return (
       <EnhancedMap {...props} ref={ref}>
         {ploygons?.map((ploygon) => {
-          return <WKT key={getKey && getKey(ploygon)} {...ploygon} />;
+          return <WKT key={ploygon.wkt} {...ploygon} />;
         })}
       </EnhancedMap>
     );
