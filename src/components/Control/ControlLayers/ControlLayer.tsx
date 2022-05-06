@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { Layer as LeafletLayer, LayerGroup } from 'leaflet';
 import { ContainerProvider, useContainerContext } from '../../../contexts/containter';
 import { useControlContext } from '../../../contexts/controlLayers';
@@ -10,6 +10,7 @@ const ControlLayer = ({ children, name, checked, overlay }: ControlLayerProp) =>
 
   const addLayer = useCallback(
     (layer: LeafletLayer) => {
+      console.log(control);
       if (!overlay) control?.addBaseLayer(layer, name);
       else control?.addOverlay(layer, name);
 
@@ -23,6 +24,7 @@ const ControlLayer = ({ children, name, checked, overlay }: ControlLayerProp) =>
 
   const removeLayer = useCallback(
     (layer: LeafletLayer) => {
+      console.log(111);
       control?.removeLayer(layer);
       container?.removeLayer(layer);
 
@@ -31,13 +33,17 @@ const ControlLayer = ({ children, name, checked, overlay }: ControlLayerProp) =>
     [control, container],
   );
 
+  const containerContext = useMemo(() => {
+    return {
+      addLayer,
+      removeLayer,
+    };
+  }, [addLayer, removeLayer]);
+
   return (
     <ContainerProvider
       value={{
-        container: {
-          addLayer,
-          removeLayer,
-        },
+        container: containerContext,
       }}
     >
       {children}

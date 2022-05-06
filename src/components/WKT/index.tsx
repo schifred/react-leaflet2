@@ -11,6 +11,8 @@ import { WKTProps } from './types';
  * 单个图层
  */
 const WKT = forwardRef<any | undefined, WKTProps>(({ children, wkt, ...props }, ref) => {
+  if (!wkt) return null;
+
   const wicket = useMemo(() => {
     return new Wicket.Wkt(wkt);
   }, [wkt]);

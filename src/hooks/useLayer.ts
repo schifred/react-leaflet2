@@ -28,6 +28,7 @@ const useLayer = <Layer extends LeafletLayer>({
 
   useEffect(() => {
     return () => {
+      console.log(container, layer);
       if (container && layer) {
         container?.removeLayer(layer);
       }

@@ -50,7 +50,7 @@ const EnhancedMap = forwardRef<LeafletMap | undefined, EnhancedMapProps>(
                     if (tileLayers.length === 1) {
                       return (
                         <ControlLayers.ControlLayer key={rest.name} {...rest}>
-                          <TileLayer key={tileLayers[0].url} {...tileLayers[0]} />
+                          <TileLayer {...tileLayers[0]} />
                         </ControlLayers.ControlLayer>
                       );
                     }

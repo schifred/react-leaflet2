@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import { EnhancedMap, WKT, latLng } from 'react-leaflet2';
 import 'leaflet/dist/leaflet.css';
 
@@ -10,10 +10,16 @@ const MB_ATTR =
 const MB_URL =
   'https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token=' + ACCESS_TOKEN;
 
-const wkt =
-  'POLYGON((120.1161003112793 30.30691909894813,120.12451171875 30.30709076032508,120.11833190917969 30.301082612131722,120.1161003112793 30.30691909894813))';
-
 export default () => {
+  const [wkt, setWkt] = useState<string>();
+  useEffect(() => {
+    setTimeout(() => {
+      setWkt(
+        'POLYGON((120.1161003112793 30.30691909894813,120.12451171875 30.30709076032508,120.11833190917969 30.301082612131722,120.1161003112793 30.30691909894813))',
+      );
+    }, 1000);
+  }, []);
+
   return (
     <Fragment>
       <EnhancedMap
