@@ -1,6 +1,6 @@
 {
   "name": "react-leaflet2",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "description": "",
   "main": "./lib/index",
   "module": "./es/index",

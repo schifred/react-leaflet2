@@ -15,6 +15,11 @@ import { useQuicklyEvents } from '../../hooks/useEvents';
 import useEvents from './useEvents';
 import type { MapProps } from './types';
 
+window.L.Icon.Default = window.L.Icon.Default.mergeOptions({
+  iconUrl: '//webapi.amap.com/theme/v1.3/markers/b/mark_bs.png',
+  iconRetinaUrl: '//webapi.amap.com/theme/v1.3/markers/b/mark_bs.png',
+});
+
 const Map = forwardRef<LeafletMap | undefined, MapProps>(
   ({ className, style, children, bounds, onMounted, ...props }, ref) => {
     const [map, setMap] = useState<LeafletMap | undefined>();
