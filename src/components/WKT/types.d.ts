@@ -15,7 +15,7 @@ export type WKTProps = (
    * @description       wkt 数据
    * @default           undefined
    */
-  wkt: string;
+  wkt?: string;
   /**
    * 挂载事件
    * @description       挂载事件

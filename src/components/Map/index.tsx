@@ -64,6 +64,7 @@ const Map = forwardRef<LeafletMap | undefined, MapProps>(
         if (center) map.setView(center, zoom);
         else if (zoom) map.setZoom(zoom);
       }
+      // @ts-ignore
     }, [zoom, center]);
 
     useEffect(() => {

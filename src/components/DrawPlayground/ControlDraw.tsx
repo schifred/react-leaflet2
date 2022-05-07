@@ -66,7 +66,7 @@ const ControlDraw = forwardRef<LeafletControl.Draw | undefined, ControlDrawProps
     const handleCreated = useCallback(
       (event: LeafletEvent) => {
         if (container) container.addLayer(event?.layer);
-        if (onCreated) onCreated(event, container);
+        handleChange(event);
       },
       [container],
     );
@@ -106,7 +106,7 @@ const ControlDraw = forwardRef<LeafletControl.Draw | undefined, ControlDrawProps
       return () => {
         unregister(map);
       };
-    }, [handleCreated, createHandler]);
+    }, [handleCreated, createHandler, methods]);
 
     return null;
   },

@@ -23,17 +23,14 @@ const useLayer = <Layer extends LeafletLayer>({
         container?.addLayer(layer);
         setLayer(layer);
       }
+
+      return () => {
+        if (container && layer) {
+          container?.removeLayer(layer);
+        }
+      };
     }
   }, [container]);
-
-  useEffect(() => {
-    return () => {
-      console.log(container, layer);
-      if (container && layer) {
-        container?.removeLayer(layer);
-      }
-    };
-  }, []);
 
   return {
     map,

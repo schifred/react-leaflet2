@@ -25,16 +25,14 @@ const useControl = <Control extends LeafletControl>({
     if (map && !control && ctl) {
       map?.addControl(ctl);
       setControl(ctl);
+
+      return () => {
+        if (map && ctl) {
+          map?.removeControl(ctl);
+        }
+      };
     }
   }, [map, createControl]);
-
-  useEffect(() => {
-    return () => {
-      if (map && control) {
-        map?.removeControl(control);
-      }
-    };
-  }, []);
 
   return {
     map,

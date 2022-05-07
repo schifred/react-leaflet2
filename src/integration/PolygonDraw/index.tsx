@@ -1,111 +1,54 @@
-import React, { forwardRef, useCallback, useEffect, useState, useRef } from 'react';
+import React, { forwardRef, useCallback, useMemo, useRef } from 'react';
 import { FeatureGroup, Map as LeafletMap } from 'leaflet';
-import { WKT, DrawPlayground, Marker } from '../../components';
-import { getCenter, getArea, getWkt, checkFeatureGroupContain } from '../../utils/map';
+// @ts-ignore
+import Wicket from 'wicket';
+import 'wicket/wicket-leaflet';
+import { Polygon, DrawPlayground } from '../../components';
+import { getWkt } from '../../utils/map';
 import EnhancedMap from '../EnhancedMap';
-import { PolygonDrawProps, Points, Value } from './types';
+import { PolygonDrawProps } from './types';
+
+const draw = {
+  polygon: true,
+  polyline: false,
+  circle: false,
+  rectangle: false,
+  marker: false,
+  circlemarker: false,
+};
 
 const PolygonDraw = forwardRef<LeafletMap | undefined, PolygonDrawProps>(
-  (
-    {
-      children,
-      ploygons,
-      points: pointsProp,
-      selectedIcon,
-      unselectedIcon,
-      wkt,
-      onChange,
-      ...props
-    },
-    ref,
-  ) => {
-    const [value, setValue] = useState<Value>({});
-    const [points, setPoints] = useState<Points>([]);
+  ({ children, wkt, onChange, ...props }, ref) => {
     const drawPlaygroundRef = useRef<FeatureGroup | undefined>(null);
 
-    useEffect(() => {
-      if (drawPlaygroundRef.current && pointsProp) {
-        const pts = pointsProp.filter((point) =>
-          checkFeatureGroupContain(drawPlaygroundRef.current!, point?.latlng),
-        );
-        setPoints(pts);
-        setValue((value) => ({
-          ...value,
-          points: pts,
-        }));
+    const handleChange = useCallback((event, featureGroup) => {
+      // props.wkt 可能是单个多边形，这里的 wkt 可能是多个多边形，并不等价
+      // 因此不能使用 useState 存储状态值
+      const wkt = getWkt(featureGroup);
+      if (onChange) onChange(wkt, featureGroup, event);
+    }, []);
+
+    const latlngs = useMemo(() => {
+      const wicket = new Wicket.Wkt(wkt);
+      const coords = wicket.components;
+      if (wicket.type === 'polygon') {
+        return wicket.coordsToLatLngs(coords, 1, wicket.coordsToLatLng);
+      } else if (wicket.type === 'multipolygon') {
+        return wicket.coordsToLatLngs(coords, 1, wicket.coordsToLatLng);
+      } else {
+        console.warn('only support polygon or multipolygon');
       }
-    }, [drawPlaygroundRef, pointsProp]);
-
-    const handleChange = useCallback(
-      (e, featureGroup) => {
-        setValue((value) => ({
-          ...value,
-          center: getCenter(featureGroup),
-          area: getArea(featureGroup),
-          wkt: getWkt(featureGroup),
-          featureGroup,
-        }));
-      },
-      [onChange],
-    );
-
-    useEffect(() => {
-      if (onChange) onChange(value);
-    }, [value, onChange]);
-
-    const handlePointClick = useCallback(
-      (point) => {
-        point.selected = !point.selected;
-        setPoints([...points]);
-
-        setValue((value) => ({
-          ...value,
-          points: [...points],
-        }));
-      },
-      [points],
-    );
+    }, [wkt]);
 
     return (
       <EnhancedMap {...props} ref={ref}>
-        {ploygons?.map((ploygon) => {
-          return <WKT key={ploygon.wkt} {...ploygon} />;
-        })}
-
-        {points?.map((point) => {
-          const { selected, latlng, ...rest } = point;
-          return (
-            <Marker
-              key={latlng}
-              {...rest}
-              icon={selected ? selectedIcon : unselectedIcon}
-              latlng={latlng}
-              onClick={handlePointClick}
-            />
-          );
-        })}
+        {/* @ts-ignore */}
+        <DrawPlayground draw={draw} onChange={handleChange} ref={drawPlaygroundRef}>
+          {/* 不能使用 WKT，wkt 变更后，latlngs 变更难以定位是否变更 */}
+          <Polygon latlngs={latlngs} fit />
+        </DrawPlayground>
 
         {children}
-
-        <DrawPlayground
-          draw={{
-            // @ts-ignore
-            polygon: true,
-            polyline: false,
-            // @ts-ignore
-            circle: false,
-            // @ts-ignore
-            rectangle: false,
-            // @ts-ignore
-            marker: false,
-            // @ts-ignore
-            circlemarker: false,
-          }}
-          onChange={handleChange}
-          ref={drawPlaygroundRef}
-        >
-          {wkt && <WKT wkt={wkt} fit></WKT>}
-        </DrawPlayground>
       </EnhancedMap>
     );
   },

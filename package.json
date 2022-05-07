@@ -1,6 +1,6 @@
 {
   "name": "react-leaflet2",
-  "version": "0.1.12",
+  "version": "0.1.14",
   "description": "",
   "main": "./lib/index",
   "module": "./es/index",
@@ -52,6 +52,7 @@
   },
   "sideEffects": [
     "*.less",
-    "*.css"
+    "*.css",
+    "*.png"
   ]
 }

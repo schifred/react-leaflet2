@@ -1,3 +1,4 @@
+import { GeoJSONObject } from '@turf/turf';
 import {
   FeatureGroup,
   GeoJSON,
@@ -10,6 +11,7 @@ import {
 } from 'leaflet';
 // @ts-ignore
 import Wicket from 'wicket';
+import 'wicket/wicket-leaflet';
 
 /**
  * 获取中心点
@@ -56,9 +58,19 @@ export const getArea = (layer: FeatureGroup | Polygon) => {
  * @param layer
  * @returns
  */
-export const getWkt = (layer: FeatureGroup | Polygon) => {
+export const getWkt = (layer: FeatureGroup) => {
   const wicket = new Wicket.Wkt();
-  wicket.fromObject(layer);
+  const geojson = layer.toGeoJSON() as GeoJSON.FeatureCollection;
+  const { features } = geojson;
+  if (!features || !features.length) return undefined;
+
+  // 仅有一个矢量图时，使用 wicket.fromObject 方法会将其转成 MultiPolygon，而不是 Polygon
+  // 这里就是避免这种转换，仍旧以 Polygon 输出
+  if (features.length == 1) {
+    wicket.fromObject(features[0].geometry);
+  } else {
+    wicket.fromObject(layer);
+  }
 
   return wicket.write();
 };
