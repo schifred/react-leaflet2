@@ -27,8 +27,8 @@ const useControl = <Control extends LeafletControl>({
       setControl(ctl);
 
       return () => {
-        if (map && ctl) {
-          map?.removeControl(ctl);
+        if (map && control) {
+          map?.removeControl(control);
         }
       };
     }
