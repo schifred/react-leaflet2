@@ -10,7 +10,6 @@ const ControlLayer = ({ children, name, checked, overlay }: ControlLayerProp) =>
 
   const addLayer = useCallback(
     (layer: LeafletLayer) => {
-      console.log(control);
       if (!overlay) control?.addBaseLayer(layer, name);
       else control?.addOverlay(layer, name);
 
@@ -24,7 +23,6 @@ const ControlLayer = ({ children, name, checked, overlay }: ControlLayerProp) =>
 
   const removeLayer = useCallback(
     (layer: LeafletLayer) => {
-      console.log(111);
       control?.removeLayer(layer);
       container?.removeLayer(layer);
 

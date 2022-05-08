@@ -7,7 +7,7 @@ export * from './components';
 export * from './integration';
 export { useMapContext } from './contexts/map';
 export { latLng, latLngBounds } from './utils/latlng';
-export { convertWkt2GeoObject } from './utils/converts';
+export { wkt2GeoJson } from './utils/converts';
 export { Leaflet } from './utils/leaflet';
 export {
   getCenter,

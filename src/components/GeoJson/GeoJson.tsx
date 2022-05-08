@@ -1,16 +1,13 @@
 import React, { forwardRef, useMemo } from 'react';
 import { Path } from 'leaflet';
-// @ts-ignore
-import Wicket from 'wicket';
+import { geoJson2Wkt } from '../../utils/converts';
 import WKT from '../WKT';
 import { GeoJsonProps } from './types';
 
 const GeoJson = forwardRef<Path | undefined, GeoJsonProps>(
-  // @ts-ignore
-  ({ children, geojson, fit, ...props }, ref) => {
+  ({ children, geojson, ...props }, ref) => {
     const wkt = useMemo(() => {
-      const wicket = new Wicket.Wkt();
-      return wicket.read(geojson).write();
+      return geojson ? geoJson2Wkt(geojson) : undefined;
     }, [geojson]);
 
     return (

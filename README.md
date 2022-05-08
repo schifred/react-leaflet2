@@ -58,6 +58,7 @@ $ npm run docs
 - [leaflet.draw](https://leaflet.github.io/Leaflet.draw/docs/leaflet-draw-latest.html)
 - [react-leaflet](https://react-leaflet.js.org)
 - [mapbox.js](https://docs.mapbox.com/mapbox.js)
+- [wicket](https://github.com/arthur-e/Wicket)
 
 ## LICENSE
 

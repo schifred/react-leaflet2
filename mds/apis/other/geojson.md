@@ -13,8 +13,28 @@ group:
 
 ## Demos
 
-### 基础
+### 点
 
-<code src="./geojson" />
+<code src="./geojson/point" />
+
+### 多点
+
+<code src="./geojson/multipoint" />
+
+### 线段
+
+<code src="./geojson/linestring" />
+
+### 多线段
+
+<code src="./geojson/multilinestring" />
+
+### 多边形
+
+<code src="./geojson/polygon" />
+
+### 多个多边形
+
+<code src="./geojson/multipolygon" />
 
 <API src="../../../src/components/GeoJson/GeoJson.tsx"></API>
